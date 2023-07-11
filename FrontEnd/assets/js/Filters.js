@@ -25,7 +25,7 @@ async function displayWorks() {
 
 
 var Objets = document.querySelector(".Filter-Objets");
-Objets.addEventListener('click',()=>filterWorksByCatObjets(1));
+Objets.addEventListener('click', () => filterWorksByCatObjets(1));
 
 async function filterWorksByCatObjets(categoryId) {
   const response = await fetch("http://localhost:5678/api/works");
@@ -39,3 +39,33 @@ async function filterWorksByCatObjets(categoryId) {
 
 }
 
+var Appartements = document.querySelector(".Filter-Appartements");
+Appartements.addEventListener('click', () => filterWorksByCatAppartements(2));
+
+async function filterWorksByCatAppartements(categoryId) {
+  const response = await fetch("http://localhost:5678/api/works");
+  const works = await response.json();
+  const result = works.filter(work => work.categoryId === categoryId);
+
+
+  console.log(result);
+
+
+
+}
+
+
+var HotelsRestaurants = document.querySelector(".Filter-Hotels");
+HotelsRestaurants.addEventListener('click', () => filterWorksByCatHotelsRestaurants(3));
+
+async function filterWorksByCatHotelsRestaurants(categoryId) {
+  const response = await fetch("http://localhost:5678/api/works");
+  const works = await response.json();
+  const result = works.filter(work => work.categoryId === categoryId);
+
+
+  console.log(result);
+
+
+
+}
