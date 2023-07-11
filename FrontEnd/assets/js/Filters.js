@@ -20,17 +20,17 @@ async function displayWorks() {
   }
 
 }
-displayWorks();
+
 
 
 
 var Objets = document.querySelector(".Filter-Objets");
-Objets.addEventListener('click',filterWorksByCatObjets);
+Objets.addEventListener('click',()=>filterWorksByCatObjets(1));
 
-async function filterWorksByCatObjets(categories) {
+async function filterWorksByCatObjets(categoryId) {
   const response = await fetch("http://localhost:5678/api/works");
   const works = await response.json();
-  const result = works.filter(work => work.categoryId == categories);
+  const result = works.filter(work => work.categoryId === categoryId);
 
 
   console.log(result);
@@ -39,4 +39,3 @@ async function filterWorksByCatObjets(categories) {
 
 }
 
-filterWorksByCatObjets(1);
