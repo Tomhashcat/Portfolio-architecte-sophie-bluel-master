@@ -11,7 +11,7 @@ async function displayWorks() {
   const works = await response.json();
   const galleryContainer = document.querySelector(".gallery");
 
-
+galleryContainer.innerHTML='';
   console.log(works);
   //PARCOUR LE TABLEAU POUR RENVOYER TOUS LES ELEMENTS
   for (let index = 0; index < works.length; index++) {
@@ -55,6 +55,7 @@ async function filterWorksByCatObjets(categoryId) {
 
   console.log(result);
   const galleryContainer = document.querySelector(".gallery");
+  galleryContainer.innerHTML='';
   for (let index = 0; index < result.length; index++) {
     const work = result[index];
 
@@ -96,6 +97,7 @@ async function filterWorksByCatAppartements(categoryId) {
 
   console.log(result);
   const galleryContainer = document.querySelector(".gallery");
+  galleryContainer.innerHTML='';
   for (let index = 0; index < result.length; index++) {
     const work = result[index];
 
@@ -137,6 +139,7 @@ async function filterWorksByCatHotelsRestaurants(categoryId) {
 
   console.log(result);
   const galleryContainer = document.querySelector(".gallery");
+  galleryContainer.innerHTML='';
   for (let index = 0; index < result.length; index++) {
     const work = result[index];
 
