@@ -54,6 +54,9 @@ async function filterWorksByCat(categoryId) {
   }
 }
 
+async function loadLogIn(){
+const response = await fetch("http://localhost:5678/api/users/login");}
+
 
 
 
