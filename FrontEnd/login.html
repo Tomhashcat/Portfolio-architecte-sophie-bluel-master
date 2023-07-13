@@ -30,19 +30,19 @@
     <main>
         <h2 class="LogInTitle">Log In</h2>
 
-        <form>
+        <form class="loginForm">
             <div class="LoginInput"><label>E-mail</label>
-                <input class="Logput mail " type="email">
+                <input type="text" id="email" name="mail" class="Logput email " autocomplete="email"  required>
             </div>
             <div class="LoginInput"><label>Mot de passe</label>
-                <input class="Logput password" type="password">
+                <input type="password" id="password" name="pass" class="Logput password" autocomplete="current-password" required>
             </div>
-           
+
             <input class="connect" type="submit">
         </form>
-        
+
     </main>
-    
+
     <footer>
         <nav>
             <ul>
