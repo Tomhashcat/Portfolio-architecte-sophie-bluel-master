@@ -62,3 +62,7 @@ function displayHTMLResponse(htmlResponse) {
   loginForm.innerHTML = htmlResponse;
   console.log(htmlResponse);
 }
+
+function addNewProject(){
+  var ne
+}

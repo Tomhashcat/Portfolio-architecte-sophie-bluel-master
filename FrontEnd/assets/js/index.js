@@ -5,7 +5,8 @@ var Tous = document.querySelector(".Filter-All");
 var Objets = document.querySelector(".Filter-Objets ");
 var Appartements = document.querySelector(" .Filter-Appartements ");
 var Hotels = document.querySelector(" .Filter-Hotels ");
-
+var modal = document.querySelector(".modif");
+modal.addEventListener("click", () => filterWorksByCat(null));
 Tous.addEventListener('click', () => filterWorksByCat(null));
 Objets.addEventListener('click', () => filterWorksByCat(1));
 Appartements.addEventListener('click', () => filterWorksByCat(2));
@@ -16,15 +17,15 @@ async function filterWorksByCat(categoryId) {
   const response = await fetch("http://localhost:5678/api/works");
   const works = await response.json();
   let filteredWorks = works;
-/**
- * je selection tout ce qui a un categoyId
- * @param {obj} categoryId
- */
+  /**
+   * je selection tout ce qui a un categoyId
+   * @param {obj} categoryId
+   */
   if (categoryId !== null) {
     filteredWorks = works.filter(work => work.categoryId === categoryId);
   }
 
-  const galleryContainer = document.querySelector(".gallery");
+  const galleryContainer = document.querySelector(".gallery ");
   galleryContainer.innerHTML = '';
 
 
@@ -52,7 +53,8 @@ async function filterWorksByCat(categoryId) {
 
 
   }
-}
+  
+}filterWorksByCat(null);
 
 
 
