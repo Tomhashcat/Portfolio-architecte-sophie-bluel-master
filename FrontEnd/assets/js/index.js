@@ -78,10 +78,37 @@ Hotels.addEventListener('click', () => filterWorksByCat(3));
 
 // Appelez la fonction de filtrage initiale pour afficher toutes les œuvres
 filterWorksByCat(0);
-
+let inputSubmit = null;
 function showModal() {
- 
+
+  const btnsContainer = document.querySelector('.btns-Modif');
   const modGalleryContainer = document.querySelector('.mod-gallery');
+
+  if (!btnsContainer.querySelector('.btn-add-photo')) {
+
+
+    const inputSubmit = document.createElement('input');
+    inputSubmit.type = 'submit';
+    inputSubmit.className = 'btn-add-photo';
+    inputSubmit.value = 'Envoyer une photo';
+
+
+    btnsContainer.appendChild(inputSubmit);
+
+  }
+  if (!btnsContainer.querySelector('.btn-delete-work')) {
+
+    const deleteLInk = document.createElement('a');
+    deleteLInk.href = '#';
+    deleteLInk.textContent = 'supprimer la galerie';
+    deleteLInk.className = 'btn-delete-work';
+
+    btnsContainer.appendChild(deleteLInk)
+  }
+
+
+
+
 
 
   // Récupérer tous les works
