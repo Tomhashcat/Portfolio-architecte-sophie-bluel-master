@@ -7,7 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
 	<meta name="description" content="">
@@ -31,18 +33,7 @@
 		<section class="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
-				<a class="modif" href="#modal">modifier</a>
-				<div id="mod" class="modal">
-					<div class="modal">
-						<a href="#" class="modal_close">&times;</a>
-						<h3 class="modal_Tiltle">Galleries photo</h3>
-						<div class="gallery">
-							
-						</div>
-						<input type="submit" class="btn_add_Photo" value="Ajouter une Photo">
-					</div>
 
-				</div>
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
@@ -56,14 +47,26 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
-			<div class="Filters"><button class=" Filter Filter-All">Tous</button><button
-					class="Filter Filter-Objets">Objets</button><button
-					class='Filter Filter-Appartements'>Appartements</button><button class="Filter Filter-Hotels">Hôtels
-					& restaurants</button></div>
-			<div class="gallery">
-				
+			<div class="btn-modal">
+				<h2>Mes Projets</h2>
+				<div class="modifier"><i class="fa-solid fa-pen-to-square"></i><a href="#mod">modifier</a></div>
 			</div>
+			<div id="mod">
+				<div class="modal">
+					<a href="#" class="modal_close">&times;</a>
+					<h3 class="modal_Tiltle">Galleries photo</h3>
+					<div class="mod-gallery">
+
+					</div>
+					<input type="submit" class="btn_add_Photo" value="Ajouter une Photo">
+				</div>
+
+			</div>
+			<div class="Filters"></div>
+
+			<div class="gallery"></div>
+
+
 		</section>
 		<section id="contact">
 			<h2>Contact</h2>

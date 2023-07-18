@@ -13,13 +13,13 @@ async function handleLogin(event) {
   const response = await fetch("http://localhost:5678/api/users/login", {
     method: 'POST',
     headers: {
-      'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4',
+      
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
      'email':'sophie.bluel@test.tld' ,
-      'password':'$2b$10$OyUbvsLMHp/gu0kPRpkJ/.757z.DBecw/wd1CE09Y3q4nDjoC7L1e'
+      'password':'S0phie'
     })
   });
 
