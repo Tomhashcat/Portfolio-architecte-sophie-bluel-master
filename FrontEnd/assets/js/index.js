@@ -25,7 +25,7 @@ filters.forEach(filter => {
   // Ajout du bouton à l'élément conteneur
   filtersContainer.appendChild(button);
 
-  // Récupération des références des boutons
+  // Récupération ref des boutons
   if (filter.className.includes('Filter-All')) {
     Tous = button;
   } else if (filter.className.includes('Filter-Objets')) {
@@ -70,13 +70,13 @@ async function filterWorksByCat(categoryId) {
   }
 }
 
-// Ajoutez les écouteurs d'événements aux boutons
+// Ajoute les écouteurs d'événements aux boutons
 Tous.addEventListener('click', () => filterWorksByCat(0));
 Objets.addEventListener('click', () => filterWorksByCat(1));
 Appartements.addEventListener('click', () => filterWorksByCat(2));
 Hotels.addEventListener('click', () => filterWorksByCat(3));
 
-// Appelez la fonction de filtrage initiale pour afficher toutes les œuvres
+// Appele la fonction de filtrage initiale pour afficher toutes les œuvres
 filterWorksByCat(0);
 let inputSubmit = null;
 function showModal() {
@@ -111,14 +111,14 @@ function showModal() {
 
 
 
-  // Récupérer tous les works
+  // Récupére tous les works
   fetch('http://localhost:5678/api/works')
     .then(response => response.json())
     .then(works => {
-      // Effacer le contenu précédent de modGalleryContainer
+      // Efface le contenu précédent de modGalleryContainer
       modGalleryContainer.innerHTML = '';
 
-      // Afficher chaque work dans modGalleryContainer
+      // Affiche chaque work dans modGalleryContainer
       works.forEach(work => {
         const figure = document.createElement('figure');
         const image = document.createElement('img');
@@ -138,6 +138,6 @@ function showModal() {
     });
 }
 
-// Ajouter l'écouteur d'événement au bouton .modifier
+// Ajoute l'écouteur d'événement au bouton .modifier
 btnModal.addEventListener('click', showModal);
 
