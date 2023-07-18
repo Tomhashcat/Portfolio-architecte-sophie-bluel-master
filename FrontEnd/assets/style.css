@@ -278,16 +278,22 @@ li:hover {
 .btn-modal{
 	display:flex;
 	justify-content:center;
+	margin-top: 13px;
 }
 .modif{
 	
 	margin-top: 12px;
 	
 }
-a{
-	text-decoration: none;
+.modifier{
+	margin-top: 10px;
+	margin-left: 20px;
+}
+.a-modifier{
+	margin-left: 5px;text-decoration: none;
 	color: black;
 }
+
 #mod {
 	
 	display: none;

@@ -80,7 +80,7 @@ Hotels.addEventListener('click', () => filterWorksByCat(3));
 filterWorksByCat(0);
 
 function showModal() {
-  const modal = document.getElementById('mod');
+ 
   const modGalleryContainer = document.querySelector('.mod-gallery');
 
 
