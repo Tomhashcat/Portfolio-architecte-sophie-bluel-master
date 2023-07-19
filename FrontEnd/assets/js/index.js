@@ -66,7 +66,7 @@ async function displayCategories() {
   categories.forEach(category => {
     const button = document.createElement("button");
     button.textContent = category.name;
-    button.addEventListener('click', filterWorksByCat(category.id));
+    button.addEventListener('click', ()=>filterWorksByCat(category.id));
     button.setAttribute("data-id", category.id);
     categoriesContainer.appendChild(button);
   })
