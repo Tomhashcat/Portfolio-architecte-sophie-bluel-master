@@ -37,6 +37,22 @@ filters.forEach(filter => {
   }
 });
 
+async function displayCategories() {
+
+  const response = await fetch('http://localhost:5678/api/categories');
+  const categories = await response.json();
+
+  const categoriesContainer = document.querySelector('.categories')
+  categories.forEach(category => {
+    const button = document.createElement("button");
+    button.textContent = category.name;
+    button.addEventListener('click', filterWorksByCat(category.id));
+    button.setAttribute("data-id", category.id);
+    categoriesContainer.appendChild(button);
+  })
+
+}
+
 // Fonction de filtrage des œuvres par catégorie
 async function filterWorksByCat(categoryId) {
   const response = await fetch("http://localhost:5678/api/works");
@@ -75,6 +91,9 @@ Tous.addEventListener('click', () => filterWorksByCat(0));
 Objets.addEventListener('click', () => filterWorksByCat(1));
 Appartements.addEventListener('click', () => filterWorksByCat(2));
 Hotels.addEventListener('click', () => filterWorksByCat(3));
+
+
+
 
 // Appele la fonction de filtrage initiale pour afficher toutes les œuvres
 filterWorksByCat(0);
