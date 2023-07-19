@@ -1,3 +1,5 @@
+
+
 var loginForm = document.querySelector(".loginForm");
 loginForm.addEventListener('submit', handleLogin);
 
@@ -31,7 +33,12 @@ async function handleLogin(event) {
     if (userId && token) {
       console.log('Utilisateur trouvé');
       console.log('userId:', userId);
+
+      localStorage.setItem('userId', userId);
+      localStorage.setItem('token', token);
       window.location.href = 'index.html';
+
+   
     } else {
       console.log('Utilisateur non trouvé');
     }
@@ -42,11 +49,3 @@ async function handleLogin(event) {
     console.log('Réponse de l\'API:', responseText);
   }
 }
-  
-
-function displayHTMLResponse(htmlResponse) {
-  var loginForm = document.querySelector(".loginForm");
-  loginForm.innerHTML = htmlResponse;
-  console.log(htmlResponse);
-}
-

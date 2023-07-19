@@ -1,10 +1,30 @@
-// Récupérez les références des boutons et des éléments conteneurs
+// Récupére les références des boutons et des éléments conteneurs
 var Tous = document.querySelector(".Filter-All");
 var Objets = document.querySelector(".Filter-Objets");
 var Appartements = document.querySelector(".Filter-Appartements");
 var Hotels = document.querySelector(".Filter-Hotels");
 var filtersContainer = document.querySelector('.Filters');
 var btnModal = document.querySelector('.modifier');
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Vérifier si  connecté 
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
+
+  const btnModifier = document.querySelector('.modifier');
+
+  // Vérifier si l'utilisateur est connecté 
+  if (userId && token) {
+    console.log('Utilisateur connecté');
+    console.log('userId:', userId);
+    
+    btnModifier.style.display = 'block';
+  } else {
+    console.log('Utilisateur non connecté');
+    
+    btnModifier.style.display = 'none';
+  }
+});
 
 // Tableau des filtres
 const filters = [
@@ -86,7 +106,7 @@ async function filterWorksByCat(categoryId) {
   }
 }
 
-// Ajoute les écouteurs d'événements aux boutons
+// écouteurs d'événements aux boutons
 Tous.addEventListener('click', () => filterWorksByCat(0));
 Objets.addEventListener('click', () => filterWorksByCat(1));
 Appartements.addEventListener('click', () => filterWorksByCat(2));
@@ -97,6 +117,8 @@ Hotels.addEventListener('click', () => filterWorksByCat(3));
 
 // Appele la fonction de filtrage initiale pour afficher toutes les œuvres
 filterWorksByCat(0);
+
+
 let inputSubmit = null;
 function showModal() {
 
@@ -134,7 +156,7 @@ function showModal() {
   fetch('http://localhost:5678/api/works')
     .then(response => response.json())
     .then(works => {
-      // Efface le contenu précédent de modGalleryContainer
+      
       modGalleryContainer.innerHTML = '';
 
       // Affiche chaque work dans modGalleryContainer
@@ -159,4 +181,6 @@ function showModal() {
 
 // Ajoute l'écouteur d'événement au bouton .modifier
 btnModal.addEventListener('click', showModal);
+
+
 
