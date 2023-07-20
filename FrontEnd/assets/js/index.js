@@ -95,7 +95,18 @@ async function displayCategories() {
 
     // Ajoute le filtre "Tous" au tableau des filtres
 
+    filters.push({ text: 'Tous', className: 'Filter Filter-All', dataid: '0' });
+    const buttonTous = document.createElement('button');
+    buttonTous.textContent = 'Tous';
+    buttonTous.className = 'Filter Filter-All';
+    buttonTous.setAttribute('data-id', '0');
+    filtersContainer.appendChild(buttonTous);
+    buttonsFiltres.push(buttonTous);
 
+    // Ajouter l'événement click pour le bouton "Tous"
+    buttonTous.addEventListener('click', () => {
+      filterWorksByCat(0);
+    });
     // Ajoute les catégories au tableau des filtres
     categories.forEach((category, index) => {
 
@@ -152,18 +163,7 @@ async function displayCategories() {
 
 
     });
-    filters.push({ text: 'Tous', className: 'Filter Filter-All', dataid: '0' });
-    const buttonTous = document.createElement('button');
-    buttonTous.textContent = 'Tous';
-    buttonTous.className = 'Filter Filter-All';
-    buttonTous.setAttribute('data-id', '0');
-    filtersContainer.appendChild(buttonTous);
-    buttonsFiltres.push(buttonTous);
-
-    // Ajouter l'événement click pour le bouton "Tous"
-    buttonTous.addEventListener('click', () => {
-      filterWorksByCat(0);
-    });
+   
 
   } catch (error) {
     console.error("Une erreur s'est produite lors de la récupération des catégories :", error);
