@@ -1,18 +1,23 @@
 // Récupére les références des boutons et des éléments conteneurs
 
-var Tous = document.querySelector(".Filter-All");
-var Objets = document.querySelector(".Filter-Objets");
-var Appartements = document.querySelector(".Filter-Appartements");
-var Hotels = document.querySelector(".Filter-Hotels");
+
 var filtersContainer = document.querySelector('.Filters');
 var btnModal = document.querySelector('.modifier');
 
-// Appele la fonction de filtrage initiale pour afficher toutes les œuvres
+var Tous = document.querySelector('.Filter-All');
+if (Tous) {
+  Tous.addEventListener('click', () => filterWorksByCat(0));
+}
 
+let Objets = null;
+let Appartements = null;
+let Hotels = null;
+// Appele la fonction de filtrage initiale pour afficher toutes les œuvres
+filterWorksByCat(0);
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  filterWorksByCat(0);
+
   // Vérifier si  connecté 
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
@@ -34,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Tableau des filtres
 const filters = [];
+const buttonsFiltres = [];
+
 
 async function displayCategories() {
 
@@ -52,55 +59,52 @@ async function displayCategories() {
         dataid: category.id
       };
       filters.push(filter);
-    });
+   
 
-    // Génération des boutons
-    filters.forEach(filter => {
-      // Création de l'élément bouton
-      const button = document.createElement('button');
-      button.textContent = filter.text;
-      button.className = filter.className;
-      button.setAttribute('data-id', filter.dataid);
+ // Génération des boutons
 
-      // Ajout du bouton à l'élément conteneur
-      filtersContainer.appendChild(button);
+    const button = document.createElement('button');
+    button.textContent = filter.text;
+    button.className = filter.className;
+    button.setAttribute('data-id', filter.dataid);
 
-      // Ajoute l'écouteur d'événement au bouton
-      button.addEventListener('click', () => filterWorksByCat(parseInt(filter.dataid)));
-    });
+    // Ajout du bouton à l'élément conteneur
+    filtersContainer.appendChild(button);
+ buttonsFiltres.push(button);
+    
+   
 
-  } catch (error) {
-    console.error("Une erreur s'est produite lors de la récupération des catégories :", error);
-  }
-}
+
 // Appele la fonction pour afficher les catégories (et les filtres) sur la page d'accueil
-displayCategories();
 
-// Génération des boutons
-filters.forEach(filter => {
-  // Création de l'élément bouton
-  const button = document.createElement('button');
-  button.textContent = filter.text;
-  button.className = filter.className;
-  button.setAttribute('data-id', filter.dataid);
-
-  // Ajout du bouton à l'élément conteneur
-  filtersContainer.appendChild(button);
-
-  // Récupération ref des boutons
-  if (filter.className.includes('Filter-All')) {
-    Tous = button;
-  } else if (filter.className.includes('Filter-Objets')) {
-    Objets = button;
-  } else if (filter.className.includes('Filter-Appartements')) {
-    Appartements = button;
-  } else if (filter.className.includes('Filter-Hotels')) {
-    Hotels = button;
-  }
-});
+    // Récupération ref des boutons
+    if (filter.className.includes('Filter-All')) {
+      Tous = button;
+    } else if (filter.className.includes('Filter-Objets')) {
+      Objets = button;
+    } else if (filter.className.includes('Filter-Appartements')) {
+      Appartements = button;
+    } else if (filter.className.includes('Filter-Hotels')) {
+      Hotels = button;
+    }
+  });
+  Tous.addEventListener('click', () => filterWorksByCat(0));
+    Objets.addEventListener('click', () => filterWorksByCat(1));
+    Appartements.addEventListener('click', () => filterWorksByCat(2));
+    Hotels.addEventListener('click', () => filterWorksByCat(3));
+} catch (error) {
+  console.error("Une erreur s'est produite lors de la récupération des catégories :", error);
+}
+}
 
 
 
+   
+
+    
+
+
+displayCategories()
 
 
 
@@ -139,10 +143,11 @@ async function filterWorksByCat(categoryId) {
 
 // écouteurs d'événements aux boutons
 document.addEventListener('DOMContentLoaded', () => {
-Tous.addEventListener('click', () => filterWorksByCat(0));
-Objets.addEventListener('click', () => filterWorksByCat(1));
-Appartements.addEventListener('click', () => filterWorksByCat(2));
-Hotels.addEventListener('click', () => filterWorksByCat(3));})
+  Tous.addEventListener('click', () => filterWorksByCat(0));
+  Objets.addEventListener('click', () => filterWorksByCat(1));
+  Appartements.addEventListener('click', () => filterWorksByCat(2));
+  Hotels.addEventListener('click', () => filterWorksByCat(3));
+})
 
 
 
@@ -152,7 +157,7 @@ Hotels.addEventListener('click', () => filterWorksByCat(3));})
 
 
 function showModal() {
- 
+
   // Appele la fonction de filtrage initiale pour afficher toutes les œuvres
   const btnsContainer = document.querySelector('.btns-Modif');
   const modGalleryContainer = document.querySelector('.mod-gallery');
@@ -209,9 +214,7 @@ function showModal() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-Tous.addEventListener('click', () => filterWorksByCat(0));
-Objets.addEventListener('click', () => filterWorksByCat(1));
-Appartements.addEventListener('click', () => filterWorksByCat(2));
-Hotels.addEventListener('click', () => filterWorksByCat(3));
+ 
 
-btnModal.addEventListener('click', () => showModal());})
+  btnModal.addEventListener('click', () => showModal());
+})
