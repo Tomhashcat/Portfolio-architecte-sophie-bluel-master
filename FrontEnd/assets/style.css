@@ -319,7 +319,9 @@ li:hover {
 #mod:target {
 	display: flex;
 }
-
+#nouvelle-modale{
+	display: none;
+}
 
 .modal_Tiltle {
 	margin-top: 20px;
