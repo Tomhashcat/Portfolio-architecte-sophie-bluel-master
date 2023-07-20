@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnModifier.style.display = 'none';
   }
- 
+
   if (Tous) {
     Tous.addEventListener('click', () => filterWorksByCat(0));
   }
@@ -94,10 +94,11 @@ async function displayCategories() {
     const categories = await response.json();
 
     // Ajoute le filtre "Tous" au tableau des filtres
-    filters.push({ text: 'Tous', className: 'Filter Filter-All', dataid: '0' });
+
 
     // Ajoute les catégories au tableau des filtres
     categories.forEach((category, index) => {
+
       const filter = {
         text: category.name,
         className: `Filter Filter-Category-${index}`,
@@ -107,7 +108,6 @@ async function displayCategories() {
 
 
       // Génération des boutons
-
       const button = document.createElement('button');
       button.textContent = filter.text;
       button.className = filter.className;
@@ -116,15 +116,28 @@ async function displayCategories() {
       // Ajout du bouton à l'élément conteneur
       filtersContainer.appendChild(button);
       buttonsFiltres.push(button);
-      // écouteurs d'événements aux boutons
-    
+
+
       button.addEventListener('click', () => {
         const categoryId = parseInt(button.getAttribute('data-id'));
         filterWorksByCat(categoryId);
       });
 
 
+     
+      button.textContent = filter.text;
+      button.className = filter.className;
+      button.setAttribute('data-id', filter.dataid);
 
+      // Ajout du bouton à l'élément conteneur
+      filtersContainer.appendChild(button);
+      buttonsFiltres.push(button);
+
+      button.addEventListener('click', () => {
+        const categoryId = parseInt(button.getAttribute('data-id'));
+        filterWorksByCat(categoryId);
+
+      });
 
       // Récupération ref des boutons
       if (filter.className.includes('Filter-All')) {
@@ -136,14 +149,27 @@ async function displayCategories() {
       } else if (filter.className.includes('Filter-Hotels')) {
         Hotels = button;
       }
-    
+
+
     });
-    
+    filters.push({ text: 'Tous', className: 'Filter Filter-All', dataid: '0' });
+    const buttonTous = document.createElement('button');
+    buttonTous.textContent = 'Tous';
+    buttonTous.className = 'Filter Filter-All';
+    buttonTous.setAttribute('data-id', '0');
+    filtersContainer.appendChild(buttonTous);
+    buttonsFiltres.push(buttonTous);
+
+    // Ajouter l'événement click pour le bouton "Tous"
+    buttonTous.addEventListener('click', () => {
+      filterWorksByCat(0);
+    });
+
   } catch (error) {
     console.error("Une erreur s'est produite lors de la récupération des catégories :", error);
   }
 }
-displayCategories()
+displayCategories();
 
 
 
