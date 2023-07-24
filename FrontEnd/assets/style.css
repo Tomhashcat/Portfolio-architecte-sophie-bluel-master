@@ -144,8 +144,35 @@ body {
 
 header {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	margin: 50px 0
+}
+.sophie{
+	display: flex;
+	flex-direction: crow;
+	justify-content: space-between;
+	margin: 50px 0
+}
+.edition-mode{
+	width: 100%;
+	height: 59px;
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+}
+.a-edition{
+	cursor:pointer;
+	margin-left: 10px;
+}
+.btn-edition{
+	width: 196px;
+	height: 37px;
+	margin-left: 20px;
+	background-color: white;
+	border-radius: 60px;
 }
 
 section {

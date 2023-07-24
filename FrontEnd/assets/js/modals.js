@@ -7,7 +7,7 @@ function toggleModal() {
     if (modal.style.display === 'none') {
         modal.style.display = 'flex';
         secondeModal.style.display = 'none'
-        
+
     } else {
         modal.style.display = 'none';
         secondeModal.style.display = 'flex';
@@ -257,11 +257,16 @@ function generateSecondModal() {
         }
     });
     btnModal.addEventListener('click', () => generateSecondModal);
+
     const modalCloseLink = document.querySelector('.modal_close');
-    modalCloseLink.addEventListener('click', () => {
-        const secondeModal = document.getElementById('seconde-modale');
-        secondeModal.style.display = 'none';
-    });
+
+    if (modalCloseLink) {
+        console.log("Element '.modal_close' trouvé !");
+        modalCloseLink.addEventListener('click', () => {
+            const secondeModal = document.getElementById('seconde-modale');
+            secondeModal.style.display = 'none';
+        });
+    }
 }
 
 

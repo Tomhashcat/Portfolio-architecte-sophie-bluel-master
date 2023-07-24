@@ -52,20 +52,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('token');
 
   const btnModifier = document.querySelector('.modifier');
-
+  const modeEdition = document.querySelector('.edition-mode')
   // Vérifier si l'utilisateur est connecté 
   if (userId && token) {
     console.log('Utilisateur connecté');
     console.log('userId:', userId);
-
+    modeEdition.style.display='flex';
     btnModifier.style.display = 'block';
   } else {
     console.log('Utilisateur non connecté');
-
+    modeEdition.style.display='none';
     btnModifier.style.display = 'none';
   }
 
-  
+
 });
 
 // Tableau des filtres
@@ -121,7 +121,7 @@ async function displayCategories() {
       });
 
 
-     
+
       button.textContent = filter.text;
       button.className = filter.className;
       button.setAttribute('data-id', filter.dataid);
@@ -136,12 +136,12 @@ async function displayCategories() {
 
       });
 
-     
-     
+
+
 
 
     });
-   
+
 
   } catch (error) {
     console.error("Une erreur s'est produite lors de la récupération des catégories :", error);
