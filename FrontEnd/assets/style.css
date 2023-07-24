@@ -336,7 +336,7 @@ li:hover {
 }
 
 .modal_Tiltle {
-	margin-top: 20px;
+	margin-top: 10px;
 	font-size: 26px;
 }
 
@@ -367,8 +367,8 @@ li:hover {
 	text-decoration: none;
 	color: black;
 	margin-top: 20px;
-	margin-left: 50%;
-
+	text-align: end;
+margin-left: 80%;
 }
 
 .mod-gallery {
@@ -405,7 +405,65 @@ li:hover {
 	white-space: nowrap;
 	width: 58px;
 }
+.upload-photo-container{
+	display: flex;
+	align-items: center;
+}
+.input-File-Seconde-Modal{
+	width: 173px;
+	height:36px;
+	border-radius: 60px;
+	border:none;
+	margin-top: 30px;
+	background-color: #dcdcdc;
+}
+.inputs-seconde-modal-choices{
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	
+	
+}
+.Titre-select-categories{
+	margin-top: 20px;
+}
+.input-categories-new-work{
+	display: flex;
+	justify-content:center;
+	margin-top: 20px;
+	width: 420px;
+	height:51px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px #00000017;
 
+}
+.titre-input-titre{
+	margin-top: 20px;
+}
+.input-new-title{
+	height: 51px;
+	margin-top: 20px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px #00000017;
+
+}
+.btn-envoyer{
+	display: flex;
+	justify-content: center;
+}
+
+.btn-add-work{
+	
+	margin-top: 10px;
+	width: 237px;
+	height:36px;
+	background-color: rgb(190, 190, 190);
+	color: white;
+	border:none ;
+	border-radius: 60px;
+	font-size: 20px;
+	font-family: 'Syne';
+}
 
 .grise-bar{
 	margin-top: 50px;
@@ -415,7 +473,16 @@ li:hover {
 	background-color:#B3B3B3;
 	border: 1px solid gray;
 }
-
+.upload-photo-container{
+	margin-top: 50px;
+	background-color: #E8F1F6;
+	width:420px ;
+	height: 169px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+}
 .btns-Modif{
 	display: flex;
 	flex-wrap: wrap;
