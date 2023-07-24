@@ -7,10 +7,7 @@ var btnModal = document.querySelector('.modifier');
 
 
 
-let Objets;
-let Appartements;
-let Hotels;
-let Tous;
+
 // Appele la fonction de filtrage initiale pour afficher toutes les œuvres
 filterWorksByCat(0);
 
@@ -68,18 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnModifier.style.display = 'none';
   }
 
-  if (Tous) {
-    Tous.addEventListener('click', () => filterWorksByCat(0));
-  }
-  if (Objets) {
-    Objets.addEventListener('click', () => filterWorksByCat(1));
-  }
-  if (Appartements) {
-    Appartements.addEventListener('click', () => filterWorksByCat(2));
-  }
-  if (Hotels) {
-    Hotels.addEventListener('click', () => filterWorksByCat(3));
-  }
+  
 });
 
 // Tableau des filtres
@@ -150,16 +136,8 @@ async function displayCategories() {
 
       });
 
-      // Récupération ref des boutons
-      if (filter.className.includes('Filter-All')) {
-        Tous = button;
-      } else if (filter.className.includes('Filter-Objets')) {
-        Objets = button;
-      } else if (filter.className.includes('Filter-Appartements')) {
-        Appartements = button;
-      } else if (filter.className.includes('Filter-Hotels')) {
-        Hotels = button;
-      }
+     
+     
 
 
     });
