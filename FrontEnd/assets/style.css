@@ -256,17 +256,17 @@ li:hover {
 	cursor: pointer;
 	height: 37px;
 	cursor: pointer;
-	color: #1D6154;
+	color: white;
 	border: 1px solid #1D6154;
 	font-family: 'Syne';
-	background-color: white;
+	background-color:  #1D6154;
 	border-radius: 25px;
 	padding-right: 30px;
 	padding-left: 30px;
 
 	&:hover {
-		background-color: #1D6154;
-		color: white;
+		background-color: white;
+		color: #1D6154;
 	}
 }
 
