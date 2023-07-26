@@ -3,8 +3,8 @@
 
 var filtersContainer = document.querySelector('.Filters');
 var btnModal = document.querySelector('.modifier');
-
-
+var loginButton = document.querySelector('.div-login');
+var logoutButton = document.querySelector('.div-logout');
 
 
 
@@ -55,13 +55,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const modeEdition = document.querySelector('.edition-mode')
   // Vérifier si l'utilisateur est connecté 
   if (userId && token) {
+
     console.log('Utilisateur connecté');
     console.log('userId:', userId);
-    modeEdition.style.display='flex';
+
+    loginButton.style.display = "none";
+    logoutButton.style.display = "block";
+
+    modeEdition.style.display = 'flex';
     btnModifier.style.display = 'block';
   } else {
     console.log('Utilisateur non connecté');
-    modeEdition.style.display='none';
+
+
+
+    modeEdition.style.display = 'none';
     btnModifier.style.display = 'none';
   }
 
@@ -147,6 +155,17 @@ async function displayCategories() {
     console.error("Une erreur s'est produite lors de la récupération des catégories :", error);
   }
 }
+
+function handlLogout() {
+  localStorage.removeItem('userId');
+  localStorage.removeItem('token');
+  loginButton.style.display = "block";
+  logoutButton.style.display = "none";
+
+}
+logoutButton.addEventListener('click', handlLogout);
+
+
 displayCategories();
 
 

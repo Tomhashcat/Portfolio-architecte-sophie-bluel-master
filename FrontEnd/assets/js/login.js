@@ -11,7 +11,7 @@ async function handleLogin(event) {
   var messageError = document.querySelector('.error-message');
   var divError = document.querySelector('.error');
   var errorClose = document.querySelector('.error-close');
-
+  var divLogin = document.querySelector('.div-login');
   var email = emailInput.value;
   var password = passwordInput.value;
 
@@ -40,15 +40,15 @@ async function handleLogin(event) {
       localStorage.setItem('userId', userId);
       localStorage.setItem('token', token);
       window.location.href = 'index.html';
-
+     
 
     } else {
       console.log('Utilisateur non trouvé');
 
 
-/**
- * GESTION DES ERREURS
- */
+      /**
+       * GESTION DES ERREURS
+       */
       messageError.textContent = "Erreur 404 ! Utilisateur ou mot de passe invalide";
       divError.style.display = 'flex';
       errorClose.addEventListener('click', function () {
