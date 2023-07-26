@@ -146,7 +146,7 @@ header {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	margin: 50px 0
+	
 }
 .sophie{
 	display: flex;
@@ -156,7 +156,7 @@ header {
 }
 .edition-mode{
 	width: 100%;
-	height: 59px;
+	height: 100px;
 	background-color: black;
 	display: flex;
 	justify-content: center;
