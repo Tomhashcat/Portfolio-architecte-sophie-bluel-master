@@ -98,7 +98,7 @@ async function displayCategories() {
 
       const filter = {
         text: category.name,
-        className: `Filter Filter-Category-${index}`,
+        className: `Filter`,
         dataid: category.id
       };
       filters.push(filter);

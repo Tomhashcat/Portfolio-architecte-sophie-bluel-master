@@ -75,7 +75,7 @@ function generateFirstModal() {
                 const figcaption = document.createElement('figcaption');
                 figcaption.textContent = work.title;
                 figure.appendChild(figcaption);
-                figure.setAttribute('data-workid', work._id);
+                figure.setAttribute('data-workid', work.id);
 
                 // Ajouter l'événement de clic pour la suppression des œuvres
                 figure.addEventListener('click', () => handleWorkClick(figure));
@@ -273,6 +273,11 @@ function generateSecondModal() {
 function deleteWork(workId) {
     fetch(`http://localhost:5678/api/works/${workId}`, {
         method: 'DELETE',
+        
+        headers: {
+            "accept" : "*/*",
+            "Authorization": "Bearer " + token
+        }
     })
         .then(response => response.json())
         .then(data => {
