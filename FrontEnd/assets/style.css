@@ -530,6 +530,34 @@ margin-left: 80%;
 	text-decoration: none;}
 
 /*LOGIN*/
+.error{
+	display: none;
+	flex-direction: column-reverse;
+	background: rgb(193, 191, 191,0.80);
+	border-radius: 10px;
+
+	padding: 50px;
+	margin-top: 20px;
+}
+.error-message{
+	
+	color: red;
+	
+	z-index: 1;
+	font-size: 30px;
+	
+}
+.error-close{
+
+font-size: 20px;
+text-decoration: none;
+color: red;
+
+margin-bottom: 20px;
+text-align: right;
+
+	
+}
 .LogInTitle {
 	display: flex;
 	justify-content: center;
@@ -573,11 +601,12 @@ form {
 	border: #1D6154;
 	cursor: pointer;
 	height: 36px;
-
+width: 150px;
 	&:hover {
 		background-color: black;
 	}
 }
+
 
 #contact {
 	width: 50%;
