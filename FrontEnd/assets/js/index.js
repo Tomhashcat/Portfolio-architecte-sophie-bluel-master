@@ -45,7 +45,7 @@ async function filterWorksByCat(categoryId) {
     galleryContainer.appendChild(figure);
   }
 }
-document.addEventListener('DOMContentLoaded', () => {
+
 
   // Vérifier si  connecté 
   const userId = localStorage.getItem('userId');
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-});
+;
 
 // Tableau des filtres
 const filters = [];

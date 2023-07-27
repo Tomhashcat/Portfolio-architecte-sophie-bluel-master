@@ -1,16 +1,20 @@
 
 let isFirstModalOpen = false;
+var mod = document.getElementById('mod');
+var modal = document.querySelector('.modal');
+const btnsContainer = document.createElement('div');
+const divEnvoyer = document.createElement('div');
 
 function toggleModal() {
-    var modal = document.getElementById('mod');
-    var secondeModal = document.getElementById('seconde-modale');
-    if (modal.style.display === 'none') {
-        modal.style.display = 'flex';
-        secondeModal.style.display = 'none'
 
+    if (isFirstModalOpen) {
+        modal.style.display = 'flex';
+        secondeModalContent.style.display = 'none';
+        generateFirstModal();
     } else {
         modal.style.display = 'none';
-        secondeModal.style.display = 'flex';
+        generateSecondModal();
+        secondeModalContent.style.display = 'flex';
     }
     isFirstModalOpen = !isFirstModalOpen;
 }
@@ -33,11 +37,25 @@ function handleWorkClick(figureElement) {
 
 function generateFirstModal() {
 
-    const btnsContainer = document.querySelector('.btns-Modif');
-    const modGalleryContainer = document.querySelector('.mod-gallery');
+
+    var mod = document.getElementById('mod');
+    mod.appendChild(modal);
 
 
-    const btnModal = document.createElement('input');
+    const modalTitre = document.createElement('h3');
+    modalTitre.className = 'modal_Tiltle';
+    modalTitre.textContent = 'Ajout photo';
+    modal.appendChild(modalTitre);
+
+    const btnsContainer = document.createElement('div');
+    btnsContainer.className = "btns-Modif";
+    modal.appendChild(btnsContainer);
+
+    const modGalleryContainer = document.createElement('div');
+    modGalleryContainer.className = "mod-gallery";
+    modal.appendChild(modGalleryContainer);
+
+    var btnModal = document.createElement('input');
 
     modGalleryContainer.innerHTML = "";
 
@@ -87,7 +105,7 @@ function generateFirstModal() {
             console.log('Une erreur s\'est produite lors de la récupération des works :', error);
         });
 
-    const figureElement = modGalleryContainer.querySelectorAll('figure');
+    const figureElement = modGalleryContainer.querySelectorAll('.figure');
     let currentWorkId = 1;
     figureElement.forEach(figure => {
         if (!figure.dataset.workid) {
@@ -121,7 +139,7 @@ function generateFirstModal() {
 
         inputSubmit.addEventListener('click', () => {
             // Ouvrir la nouvelle page modal générée par la fonction
-            generateSecondModal();
+            toggleModal();
         });
 
 
@@ -138,16 +156,22 @@ function generateFirstModal() {
 
         })
     }
+    mod.innerHTML = "";
+
 }
 
+const btnOpenFirstModal = document.querySelector('.a-modifier');
+btnOpenFirstModal.addEventListener('click', () => {
 
-document.addEventListener('DOMContentLoaded', () => {
-    generateSecondModal();
-    const btnModal = document.querySelector('.btn-modal');
-    const btnAddPhoto = document.querySelector('.btn-add-photo');
-    btnModal.addEventListener('click', () => generateFirstModal());
-    btnAddPhoto.addEventListener('click', () => toggleModal());
+    generateFirstModal();
 });
+
+
+
+
+
+
+
 
 
 
@@ -159,12 +183,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function generateSecondModal() {
 
-    const secondeModalContent = document.querySelector('.seconde-modale-content');
+   const divModal= document.querySelector('.modal');
+
+
+
+
+
+
+
+    const secondeModalTitre = document.createElement('h3');
+    secondeModalTitre.className = 'modal_Tiltle';
+    secondeModalTitre.textContent = "Ajouter une photo";
+    modal.appendChild(secondeModalTitre);
+
+    var secondeModalContent = document.createElement('div');
+    secondeModalContent.className = 'seconde-modale';
+    divModal.appendChild(secondeModalContent);
+
     // Créez les éléments pour la nouvelle modal et les éléments nécessaires
     const uploadPhotoContainer = document.createElement('div');
     uploadPhotoContainer.className = "upload-photo-container";
 
-    const inputPhoto = document.createElement('button');
+
+    const inputChoiceContent = document.createElement('div');
+    inputChoiceContent.className = 'inputs-seconde-modal-choices';
+    secondeModalContent.appendChild(inputChoiceContent);
+
+    const inputPhoto = document.createElement('input');
     inputPhoto.className = 'input-File-Seconde-Modal';
     inputPhoto.type = 'file';
     inputPhoto.accept = 'image/*';
@@ -172,8 +217,10 @@ function generateSecondModal() {
     const labelInputPhoto = document.createElement('label');
     labelInputPhoto.textContent = '+ Ajouter une photo';
 
+    const btnValider = document.createElement('div');
+    btnValider.className = "btn-valider";
+    secondeModalContent.appendChild(btnValider);
 
-    const inputsChoices = document.querySelector('.inputs-seconde-modal-choices');
 
     const inputTitle = document.createElement('input');
     inputTitle.className = 'input-new-title';
@@ -191,7 +238,41 @@ function generateSecondModal() {
     const labelCategories = document.createElement('label');
     labelCategories.textContent = 'Catégorie';
     labelCategories.className = 'Titre-select-categories'
+    const btnModal = document.createElement('input');
+    btnModal.type = 'submit';
+    btnModal.className = 'btn-add-photo';
+    btnModal.textContent = 'Ajouter une photo';
+    const existingBtnAddPhoto = btnsContainer.querySelector('.btn-add-photo');
 
+    // Ajoute les éléments créés à la modal
+
+    inputPhoto.appendChild(labelInputPhoto);
+    uploadPhotoContainer.appendChild(inputPhoto);
+
+    inputChoiceContent.appendChild(labelTitre);
+    inputChoiceContent.appendChild(inputTitle);
+    inputChoiceContent.appendChild(labelCategories);
+    inputChoiceContent.appendChild(selectCategories);
+
+    divEnvoyer.appendChild(boutonEnvoyer);
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+    modalContent.appendChild(uploadPhotoContainer);
+    secondeModalContent.appendChild(uploadPhotoContainer);
+
+    const divEnvoyer = document.createElement('div');
+    divEnvoyer.className = 'inputChoiceContent';
+    const boutonEnvoyer = document.createElement('button');
+    boutonEnvoyer.className = 'btn-add-work';
+    boutonEnvoyer.textContent = 'Valider';
+    boutonEnvoyer.disabled = true;
+
+    if (!existingBtnAddPhoto) {
+        btnsContainer.appendChild(btnModal);
+    }
+    btnModal.addEventListener('click', () => {
+        toggleModal();
+    });
     fetch('http://localhost:5678/api/categories')
         .then(response => response.json())
         .then(data => {
@@ -211,28 +292,10 @@ function generateSecondModal() {
 
 
 
-    const divEnvoyer = document.querySelector('.btn-valider');
-    const boutonEnvoyer = document.createElement('button');
-    boutonEnvoyer.className = 'btn-add-work';
-    boutonEnvoyer.textContent = 'Valider';
-    boutonEnvoyer.disabled = true; // Désactive le bouton par défaut
+    // Désactive le bouton par défaut
 
 
-    // Ajoute les éléments créés à la modal
 
-    inputPhoto.appendChild(labelInputPhoto);
-    uploadPhotoContainer.appendChild(inputPhoto);
-
-    inputsChoices.appendChild(labelTitre);
-    inputsChoices.appendChild(inputTitle);
-    inputsChoices.appendChild(labelCategories);
-    inputsChoices.appendChild(selectCategories);
-
-    divEnvoyer.appendChild(boutonEnvoyer);
-    const modalContent = document.createElement('div');
-    modalContent.className = 'modal-content';
-    modalContent.appendChild(uploadPhotoContainer);
-    secondeModalContent.appendChild(uploadPhotoContainer);
 
     // Ajoute l'écouteur d'événement pour le champ de téléchargement de fichier
     inputPhoto.addEventListener('change', () => {
@@ -250,13 +313,11 @@ function generateSecondModal() {
     boutonEnvoyer.addEventListener('click', () => {
         const file = inputPhoto.files[0]; // Récupérer le fichier sélectionné
         if (file) {
-            // Vous pouvez maintenant utiliser les informations du fichier (par exemple, envoyer l'image vers un serveur, etc.).
-            // Puis, vous pouvez ajouter le nouveau travail en utilisant ces informations.
             console.log("Nouveau travail ajouté !");
-            // ... (votre code pour ajouter le nouveau travail)
+
         }
     });
-    btnModal.addEventListener('click', () => generateSecondModal);
+    btnModal.addEventListener('click', () => generateSecondModal());
 
     const modalCloseLink = document.querySelector('.modal_close');
 
@@ -267,15 +328,21 @@ function generateSecondModal() {
             secondeModal.style.display = 'none';
         });
     }
+    secondeModalContent.innerHTML = "";
+    secondeModalContent.appendChild(divModal);
 }
+
+
+btnModifier.addEventListener('click', () => toggleModal());
+
 
 
 function deleteWork(workId) {
     fetch(`http://localhost:5678/api/works/${workId}`, {
         method: 'DELETE',
-        
+
         headers: {
-            "accept" : "*/*",
+            "accept": "*/*",
             "Authorization": "Bearer " + token
         }
     })
