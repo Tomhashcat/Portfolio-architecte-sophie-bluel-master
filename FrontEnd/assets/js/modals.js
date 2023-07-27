@@ -2,19 +2,21 @@
 let isFirstModalOpen = false;
 var mod = document.getElementById('mod');
 var modal = document.querySelector('.modal');
-const btnsContainer = document.createElement('div');
-const divEnvoyer = document.createElement('div');
+var modalContent = document.querySelector('modal-content');
 
 function toggleModal() {
 
     if (isFirstModalOpen) {
+        mod.style.display="flex";
         modal.style.display = 'flex';
-        secondeModalContent.style.display = 'none';
+
         generateFirstModal();
     } else {
-        modal.style.display = 'none';
+        mod.style.display="flex";
+        modalContent.innerHTML = "";
+
         generateSecondModal();
-        secondeModalContent.style.display = 'flex';
+        modal.style.display = 'flex';
     }
     isFirstModalOpen = !isFirstModalOpen;
 }
@@ -38,8 +40,8 @@ function handleWorkClick(figureElement) {
 function generateFirstModal() {
 
 
-    var mod = document.getElementById('mod');
-    mod.appendChild(modal);
+
+
 
 
     const modalTitre = document.createElement('h3');
@@ -55,20 +57,15 @@ function generateFirstModal() {
     modGalleryContainer.className = "mod-gallery";
     modal.appendChild(modGalleryContainer);
 
-    var btnModal = document.createElement('input');
+    var btnOpenSecondModal = document.createElement('input');
+    btnOpenSecondModal.type = 'submit';
+    btnOpenSecondModal.className = 'btn-add-photo';
+    btnOpenSecondModal.textContent = 'Ajouter une photo';
 
-    modGalleryContainer.innerHTML = "";
 
-    btnModal.type = 'submit';
-    btnModal.className = 'btn-add-photo';
-    btnModal.textContent = 'Ajouter une photo';
-    const existingBtnAddPhoto = btnsContainer.querySelector('.btn-add-photo');
-    if (!existingBtnAddPhoto) {
-        btnsContainer.appendChild(btnModal);
-    }
-    btnModal.addEventListener('click', () => {
-        toggleModal();
-    });
+
+
+
 
 
 
@@ -128,23 +125,26 @@ function generateFirstModal() {
 
 
 
-    if (!btnsContainer.querySelector('.btn-add-photo')) {
-
-        const inputSubmit = document.createElement('input');
-        inputSubmit.type = 'submit';
-        inputSubmit.className = 'btn-add-photo';
-        inputSubmit.value = 'Envoyer une photo';
-
-        btnsContainer.appendChild(inputSubmit);
-
-        inputSubmit.addEventListener('click', () => {
-            // Ouvrir la nouvelle page modal générée par la fonction
-            toggleModal();
-        });
 
 
 
+
+    btnsContainer.appendChild(btnOpenSecondModal);
+
+    btnOpenSecondModal.addEventListener('click', () => {
+        // Ouvrir la nouvelle page modal générée par la fonction
+        toggleModal();
+    });
+    if (!btnOpenSecondModal) {
+        btnsContainer.appendChild(btnOpenSecondModal);
     }
+    btnOpenSecondModal.addEventListener('click', () => {
+        generateSecondModal();
+    });
+
+
+
+
 
     if (!btnsContainer.querySelector('.btn-delete-work')) {
         const deleteLInk = document.createElement('a');
@@ -156,7 +156,7 @@ function generateFirstModal() {
 
         })
     }
-    mod.innerHTML = "";
+
 
 }
 
@@ -183,7 +183,7 @@ btnOpenFirstModal.addEventListener('click', () => {
 
 function generateSecondModal() {
 
-   const divModal= document.querySelector('.modal');
+    modal.innerHTML = "";
 
 
 
@@ -198,16 +198,16 @@ function generateSecondModal() {
 
     var secondeModalContent = document.createElement('div');
     secondeModalContent.className = 'seconde-modale';
-    divModal.appendChild(secondeModalContent);
+    modal.appendChild(secondeModalContent);
 
     // Créez les éléments pour la nouvelle modal et les éléments nécessaires
     const uploadPhotoContainer = document.createElement('div');
     uploadPhotoContainer.className = "upload-photo-container";
-
+    secondeModalContent.appendChild(uploadPhotoContainer);
 
     const inputChoiceContent = document.createElement('div');
     inputChoiceContent.className = 'inputs-seconde-modal-choices';
-    secondeModalContent.appendChild(inputChoiceContent);
+    uploadPhotoContainer.appendChild(inputChoiceContent);
 
     const inputPhoto = document.createElement('input');
     inputPhoto.className = 'input-File-Seconde-Modal';
@@ -242,7 +242,7 @@ function generateSecondModal() {
     btnModal.type = 'submit';
     btnModal.className = 'btn-add-photo';
     btnModal.textContent = 'Ajouter une photo';
-    const existingBtnAddPhoto = btnsContainer.querySelector('.btn-add-photo');
+    const BtnAddPhoto = document.querySelector('.btn-add-photo');
 
     // Ajoute les éléments créés à la modal
 
@@ -254,11 +254,11 @@ function generateSecondModal() {
     inputChoiceContent.appendChild(labelCategories);
     inputChoiceContent.appendChild(selectCategories);
 
-    divEnvoyer.appendChild(boutonEnvoyer);
+
     const modalContent = document.createElement('div');
     modalContent.className = 'modal-content';
     modalContent.appendChild(uploadPhotoContainer);
-    secondeModalContent.appendChild(uploadPhotoContainer);
+
 
     const divEnvoyer = document.createElement('div');
     divEnvoyer.className = 'inputChoiceContent';
@@ -266,8 +266,10 @@ function generateSecondModal() {
     boutonEnvoyer.className = 'btn-add-work';
     boutonEnvoyer.textContent = 'Valider';
     boutonEnvoyer.disabled = true;
-
-    if (!existingBtnAddPhoto) {
+    divEnvoyer.appendChild(boutonEnvoyer);
+    if (!BtnAddPhoto) {
+        var btnsContainer = document.createElement('div');
+        btnsContainer.className = 'btns-container';
         btnsContainer.appendChild(btnModal);
     }
     btnModal.addEventListener('click', () => {
@@ -292,7 +294,7 @@ function generateSecondModal() {
 
 
 
-    // Désactive le bouton par défaut
+
 
 
 
@@ -329,7 +331,7 @@ function generateSecondModal() {
         });
     }
     secondeModalContent.innerHTML = "";
-    secondeModalContent.appendChild(divModal);
+
 }
 
 
