@@ -24,9 +24,9 @@ function toggleModal() {
         modal.style.display = "flex";
         firstModalDiv.style.display = 'none';
         secondModalDiv.style.display = 'flex';
-
-        generateFirstModal();
-
+        if (!firstModalDiv) {
+            generateFirstModal();
+        }
 
     }
     isFirstModalOpen = !isFirstModalOpen;
@@ -58,15 +58,15 @@ function generateFirstModal() {
     firstModalDiv.className = "First-modal";
     modal.appendChild(firstModalDiv);
 
-const modalClose= document.createElement('a');
-modalClose.className="modal_close";
-modalClose.textContent="x";
-firstModalDiv.appendChild(modalClose);
+    const modalClose = document.createElement('a');
+    modalClose.className = "modal_close";
+    modalClose.textContent = "x";
+    firstModalDiv.appendChild(modalClose);
 
 
-const griseBar=document.createElement('div');
-griseBar.className='grise-bar';
-firstModalDiv.appendChild(griseBar);
+    const griseBar = document.createElement('div');
+    griseBar.className = 'grise-bar';
+    firstModalDiv.appendChild(griseBar);
 
     const modalTitre = document.createElement('h3');
     modalTitre.className = 'modal_Tiltle';
@@ -161,7 +161,7 @@ firstModalDiv.appendChild(griseBar);
 
     btnOpenSecondModal.addEventListener('click', () => {
         // Ouvrir la nouvelle page modal générée par la fonction
-        toggleModal();
+        generateSecondModal();
     });
     if (!btnOpenSecondModal) {
         btnsContainer.appendChild(btnOpenSecondModal);
@@ -186,7 +186,7 @@ const btnOpenFirstModal = document.querySelector('.a-modifier');
 btnOpenFirstModal.addEventListener('click', () => {
     mod.style.display = "flex";
     modal.style.display = "flex";
-     generateFirstModal()
+    generateFirstModal()
 });
 
 
@@ -217,15 +217,17 @@ btnOpenFirstModal.addEventListener('click', () => {
 function generateSecondModal() {
 
 
+   firstModalDiv.innerHTML="";
 
 
+    if (!secondModalDiv) { // Vérifiez si la div n'est pas déjà créée
+        secondModalDiv = document.createElement('div');
+        secondModalDiv.className = "seconde-modal";
+      
+    }
 
 
-    secondModalDiv = document.createElement('div');
-    secondModalDiv.className = "seconde-modal";
-    modal.appendChild(secondModalDiv);
-
-
+  modal.appendChild(secondModalDiv);
 
     const secondeModalTitre = document.createElement('h3');
     secondeModalTitre.className = 'modal_Tiltle';
@@ -363,8 +365,8 @@ function generateSecondModal() {
             secondeModal.style.display = 'none';
         });
     }
-    secondModalDiv.innerHTML = "";
-    toggleModal();
+  
+
 
 }
 
