@@ -403,7 +403,9 @@ li:hover {
 	background: black;
 }
 
-
+.selected-work{
+	border: 1px solid red;
+}
 
 
 .modal_close {

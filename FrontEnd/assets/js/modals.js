@@ -104,7 +104,9 @@ function generateFirstModal() {
                 image.src = work.imageUrl;
                 image.alt = work.title;
                 figure.appendChild(image);
-            
+
+            const  workId= work.id;
+
                 const trashIcon = document.createElement('i');
                 trashIcon.className = 'fas fa-trash-can'; 
                 figure.appendChild(trashIcon);
@@ -112,7 +114,7 @@ function generateFirstModal() {
                 const figcaption = document.createElement('figcaption');
                 figcaption.textContent = work.title;
                 figure.appendChild(figcaption);
-                figure.setAttribute('data-workid', work.id);
+                figure.setAttribute('data-workid', workId);
             
                 // Ajouter l'événement de clic pour la suppression des œuvres
                 figure.addEventListener('click', () => handleWorkClick(figure));
@@ -361,15 +363,23 @@ function handleWorkClick(figureElement) {
         // Appliquer un style visuel pour indiquer qu'un work est sélectionné
         figureElement.classList.add('selected-work');
     }
+    handleDeleteButtonClick(workId);
 }
 
 function handleDeleteButtonClick(workId) {
+    deleteWork(workId);
    
-        deleteWork(workId);
-    
-
-    // Vider la liste des workIds sélectionnés
-    selectedWorkIds = [];
+       // Vérifier s'il y a des œuvres sélectionnées pour la suppression
+    if (selectedWorkIds.length > 0) {
+        // Supprimer les œuvres en parcourant la liste des IDs sélectionnés
+        selectedWorkIds.forEach(workId => {
+            deleteWork(workId);
+        });
+        // Vider la liste des workIds sélectionnés après la suppression
+        selectedWorkIds = [];
+    } else {
+        console.log("Aucun travail sélectionné pour la suppression");
+    }
 
     // Mettez à jour la première modal pour refléter les changements (rechargez les works)
     generateFirstModal();
