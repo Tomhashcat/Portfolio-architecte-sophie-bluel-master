@@ -10,9 +10,8 @@ function toggleModal() {
 
     if (isFirstModalOpen) {
 
-        
-        mod.style.display = "none";
-        modal.style.display = "none";
+
+
         secondModalDiv.style.display = 'none';
         firstModalDiv.style.display = 'flex';
 
@@ -21,13 +20,14 @@ function toggleModal() {
 
 
     } else {
-
+        mod.style.display = "flex";
+        modal.style.display = "flex";
         firstModalDiv.style.display = 'none';
-
-
         secondModalDiv.style.display = 'flex';
 
         generateFirstModal();
+
+
     }
     isFirstModalOpen = !isFirstModalOpen;
 }
@@ -51,15 +51,22 @@ function handleWorkClick(figureElement) {
 function generateFirstModal() {
 
     if (document.querySelector('.First-modal')) {
-       
+
         return;
-      }
+    }
     firstModalDiv = document.createElement('div');
     firstModalDiv.className = "First-modal";
     modal.appendChild(firstModalDiv);
 
+const modalClose= document.createElement('a');
+modalClose.className="modal_close";
+modalClose.textContent="x";
+firstModalDiv.appendChild(modalClose);
 
 
+const griseBar=document.createElement('div');
+griseBar.className='grise-bar';
+firstModalDiv.appendChild(griseBar);
 
     const modalTitre = document.createElement('h3');
     modalTitre.className = 'modal_Tiltle';
@@ -80,7 +87,7 @@ function generateFirstModal() {
     btnOpenSecondModal.value = 'Ajouter une photo';
     btnsContainer.appendChild(btnOpenSecondModal);
 
-  
+
 
     const deleteWorkBtn = document.createElement('a');
 
@@ -176,7 +183,11 @@ function generateFirstModal() {
 }
 
 const btnOpenFirstModal = document.querySelector('.a-modifier');
-btnOpenFirstModal.addEventListener('click', ()=>{generateFirstModal()});
+btnOpenFirstModal.addEventListener('click', () => {
+    mod.style.display = "flex";
+    modal.style.display = "flex";
+     generateFirstModal()
+});
 
 
 
