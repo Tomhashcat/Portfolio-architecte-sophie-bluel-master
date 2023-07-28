@@ -146,15 +146,17 @@ header {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	
+
 }
-.sophie{
+
+.sophie {
 	display: flex;
 	flex-direction: crow;
 	justify-content: space-between;
 	margin: 50px 0
 }
-.edition-mode{
+
+.edition-mode {
 	width: 100%;
 	height: 100px;
 	background-color: black;
@@ -163,11 +165,13 @@ header {
 	align-items: center;
 	color: white;
 }
-.a-edition{
-	cursor:pointer;
+
+.a-edition {
+	cursor: pointer;
 	margin-left: 10px;
 }
-.btn-edition{
+
+.btn-edition {
 	width: 196px;
 	height: 37px;
 	margin-left: 20px;
@@ -286,7 +290,7 @@ li:hover {
 	color: white;
 	border: 1px solid #1D6154;
 	font-family: 'Syne';
-	background-color:  #1D6154;
+	background-color: #1D6154;
 	border-radius: 25px;
 	padding-right: 30px;
 	padding-left: 30px;
@@ -307,7 +311,7 @@ li:hover {
 	display: flex;
 	justify-content: center;
 	margin-top: 13px;
-	
+
 }
 
 .modif {
@@ -329,7 +333,7 @@ li:hover {
 }
 
 #mod {
-
+z-index: 1;
 	display: none;
 	width: 100%;
 	height: 160%;
@@ -345,7 +349,7 @@ li:hover {
 }
 
 
-.seconde-modale{
+.seconde-modale {
 	display: none;
 	width: 100%;
 	height: 160%;
@@ -370,8 +374,11 @@ li:hover {
 	display: flex;
 	font-size: 58px;
 }
-
-.modal {
+.modal{
+	display: none;
+}
+.First-modal {
+	
 	margin-bottom: 50%;
 	display: flex;
 	flex-wrap: wrap;
@@ -393,7 +400,7 @@ li:hover {
 	color: black;
 	margin-top: 20px;
 	text-align: end;
-margin-left: 80%;
+	margin-left: 80%;
 }
 
 .mod-gallery {
@@ -401,7 +408,7 @@ margin-left: 80%;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
-	
+
 	width: 70%;
 	height: 48%;
 	margin-top: 20px;
@@ -421,7 +428,7 @@ margin-left: 80%;
 	flex-wrap: wrap;
 	flex-direction: column;
 	margin-top: 12px;
-	
+
 }
 
 .mod-gallery figure figcaption {
@@ -430,135 +437,151 @@ margin-left: 80%;
 	white-space: nowrap;
 	width: 58px;
 }
-.upload-photo-container{
+
+.upload-photo-container {
 	display: flex;
 	align-items: center;
 }
-.input-File-Seconde-Modal{
+
+.input-File-Seconde-Modal {
 	width: 173px;
-	height:36px;
+	height: 36px;
 	border-radius: 60px;
-	border:none;
+	border: none;
 	margin-top: 30px;
 	background-color: #dcdcdc;
 }
-.inputs-seconde-modal-choices{
+
+.inputs-seconde-modal-choices {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
-	
-	
+
+
 }
-.Titre-select-categories{
+
+.Titre-select-categories {
 	margin-top: 20px;
 }
-.input-categories-new-work{
+
+.input-categories-new-work {
 	display: flex;
-	justify-content:center;
+	justify-content: center;
 	margin-top: 20px;
 	width: 420px;
-	height:51px;
+	height: 51px;
 	border: none;
 	box-shadow: 0px 4px 14px 0px #00000017;
 
 }
-.titre-input-titre{
+
+.titre-input-titre {
 	margin-top: 20px;
 }
-.input-new-title{
+
+.input-new-title {
 	height: 51px;
 	margin-top: 20px;
 	border: none;
 	box-shadow: 0px 4px 14px 0px #00000017;
 
 }
-.btn-envoyer{
+
+.btn-envoyer {
 	display: flex;
 	justify-content: center;
 }
 
-.btn-add-work{
-	
+.btn-add-work {
+
 	margin-top: 10px;
 	width: 237px;
-	height:36px;
+	height: 36px;
 	background-color: rgb(190, 190, 190);
 	color: white;
-	border:none ;
+	border: none;
 	border-radius: 60px;
 	font-size: 20px;
 	font-family: 'Syne';
 }
 
-.grise-bar{
+.grise-bar {
 	position: absolute;
 	margin-top: 78%;
 	margin-bottom: 23px;
 	display: flex;
 	width: 420px;
-	background-color:#B3B3B3;
+	background-color: #B3B3B3;
 	border: 1px solid gray;
 }
-.upload-photo-container{
+
+.upload-photo-container {
 	margin-top: 50px;
 	background-color: #E8F1F6;
-	width:420px ;
+	width: 420px;
 	height: 169px;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: center;
 }
-.btns-Modif{
+
+.btns-Modif {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
 	text-align: center;
 	position: absolute;
 	margin-top: 83%;
-	
+
 }
-.btn-add-photo{
-	
+
+.btn-add-photo {
+
 	width: 350px;
 	height: 36px;
 	border: none;
 	cursor: pointer;
 }
-.btn-delete-work{
- 	color: red;
-	
-	text-decoration: none;}
+
+.btn-delete-work {
+	color: red;
+
+	text-decoration: none;
+}
 
 /*LOGIN*/
-.error{
+.error {
 	display: none;
 	flex-direction: column-reverse;
-	background: rgb(193, 191, 191,0.80);
+	background: rgb(193, 191, 191, 0.80);
 	border-radius: 10px;
 
 	padding: 50px;
 	margin-top: 20px;
 }
-.error-message{
-	
+
+.error-message {
+
 	color: red;
-	
+
 	z-index: 1;
 	font-size: 30px;
-	
+
 }
-.error-close{
 
-font-size: 20px;
-text-decoration: none;
-color: red;
+.error-close {
 
-margin-bottom: 20px;
-text-align: right;
+	font-size: 20px;
+	text-decoration: none;
+	color: red;
 
-	
+	margin-bottom: 20px;
+	text-align: right;
+
+
 }
+
 .LogInTitle {
 	display: flex;
 	justify-content: center;
@@ -602,7 +625,8 @@ form {
 	border: #1D6154;
 	cursor: pointer;
 	height: 36px;
-width: 150px;
+	width: 150px;
+
 	&:hover {
 		background-color: black;
 	}
@@ -653,7 +677,7 @@ input[type="submit"] {
 	color: white;
 	background-color: #1D6154;
 	margin: 2em auto;
-	
+
 	text-align: center;
 	border-radius: 60px;
 }
