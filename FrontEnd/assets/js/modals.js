@@ -6,6 +6,7 @@ var modal = document.querySelector('.modal');
 var firstModalDiv;
 var secondModalDiv;
 
+let selectedWorkIds = [];
 function toggleModal() {
 
     if (isFirstModalOpen) {
@@ -17,8 +18,8 @@ function toggleModal() {
     } else {
         mod.style.display = "flex";
         modal.style.display = "flex";
-        firstModalDiv.style.display = 'flex';
-        secondModalDiv.style.display = 'none';
+        firstModalDiv.style.display = 'none';
+        secondModalDiv.style.display = 'flex';
         if (!firstModalDiv) {
             generateFirstModal();
         }
@@ -32,20 +33,7 @@ function toggleModal() {
     isFirstModalOpen = !isFirstModalOpen;
 }
 
-function handleWorkClick(figureElement) {
-    const workIdToDelete = figureElement.dataset.workId;
-    fetch(`http://localhost:5678/api/works/${workIdToDelete}`, {
-        method: 'DELETE',
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('oeuvre supprimée avec succes', data);
-            generateFirstModal();
-        })
-        .catch(error => {
-            console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
-        });
-}
+
 
 
 function generateFirstModal() {
@@ -92,9 +80,11 @@ function generateFirstModal() {
     const deleteWorkBtn = document.createElement('a');
 
     deleteWorkBtn.className = ('btn-delete-work');
+   
 
-
-
+    deleteWorkBtn.addEventListener('click',()=>{
+    const workIdToDelete = figureElement.dataset.workid;
+    handleDeleteButtonClick(workIdToDelete);});
 
 
 
@@ -114,15 +104,19 @@ function generateFirstModal() {
                 image.src = work.imageUrl;
                 image.alt = work.title;
                 figure.appendChild(image);
-
+            
+                const trashIcon = document.createElement('i');
+                trashIcon.className = 'fas fa-trash-can'; 
+                figure.appendChild(trashIcon);
+            
                 const figcaption = document.createElement('figcaption');
                 figcaption.textContent = work.title;
                 figure.appendChild(figcaption);
                 figure.setAttribute('data-workid', work.id);
-
+            
                 // Ajouter l'événement de clic pour la suppression des œuvres
                 figure.addEventListener('click', () => handleWorkClick(figure));
-
+            
                 modGalleryContainer.appendChild(figure);
             });
         })
@@ -146,8 +140,12 @@ function generateFirstModal() {
 
 
     deleteWorkBtn.addEventListener('click', () => {
-        const workIdToDelete = deleteWorkBtn.dataset.workid;
-        deleteWork(workIdToDelete);
+        const workIdToDelete = selectedWorkIds[0];
+        if (workIdToDelete) {
+            handleDeleteButtonClick(workIdToDelete);
+        } else {
+            console.log("Aucun travail sélectionné pour la suppression");
+        }
     });
 
 
@@ -188,31 +186,6 @@ btnOpenFirstModal.addEventListener('click', () => {
     modal.style.display = "flex";
     generateFirstModal()
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function generateSecondModal() {
 
@@ -372,28 +345,77 @@ function generateSecondModal() {
 
 }
 
+function handleWorkClick(figureElement) {
+    const workId = figureElement.dataset.workid;
+    if (selectedWorkIds.includes(workId)) {
+        // Le workId est déjà sélectionné, donc le supprimer de la liste
+        const index = selectedWorkIds.indexOf(workId);
+        if (index > -1) {
+            selectedWorkIds.splice(index, 1);
+        }
+        // Appliquer un style visuel pour indiquer qu'un work est désélectionné
+        figureElement.classList.remove('selected-work');
+    } else {
+        // Le workId n'est pas encore sélectionné, donc l'ajouter à la liste
+        selectedWorkIds.push(workId);
+        // Appliquer un style visuel pour indiquer qu'un work est sélectionné
+        figureElement.classList.add('selected-work');
+    }
+}
 
+function handleDeleteButtonClick(workId) {
+   
+        deleteWork(workId);
+    
 
+    // Vider la liste des workIds sélectionnés
+    selectedWorkIds = [];
 
+    // Mettez à jour la première modal pour refléter les changements (rechargez les works)
+    generateFirstModal();
+}
 function deleteWork(workId) {
     fetch(`http://localhost:5678/api/works/${workId}`, {
         method: 'DELETE',
-
         headers: {
             "accept": "*/*",
-            "Authorization": "Bearer " + token
+            "Authorization": "Bearer " + token // Assurez-vous que 'token' est défini ou remplacez-le par le token valide
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Œuvre supprimée avec succès:', data);
-            generateFirstModal();
-        })
-        .catch(error => {
-            console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
-        });
-
+    .then(response => response.json())
+    .then(data => {
+        console.log('Œuvre supprimée avec succès:', data);
+        // Vous pouvez effectuer des actions supplémentaires ici après la suppression réussie
+    })
+    .catch(error => {
+        console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
+    });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

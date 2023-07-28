@@ -388,6 +388,20 @@ li:hover {
 	height: 670px;
 
 }
+.fas{
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 10px;
+	width:17px;
+	height:20px;
+	position: absolute;
+	margin-left: 40px;
+	margin-top: 3px;
+	color:white;
+	background: black;
+}
 
 
 
