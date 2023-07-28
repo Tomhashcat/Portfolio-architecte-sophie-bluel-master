@@ -9,23 +9,25 @@ var secondModalDiv;
 function toggleModal() {
 
     if (isFirstModalOpen) {
-        mod.style.display="flex";
-       modal.style.display="flex";
+
+        
+        mod.style.display = "none";
+        modal.style.display = "none";
         secondModalDiv.style.display = 'none';
         firstModalDiv.style.display = 'flex';
 
 
 
 
-        generateFirstModal();
+
     } else {
-       
+
         firstModalDiv.style.display = 'none';
 
 
         secondModalDiv.style.display = 'flex';
-        generateSecondModal();
 
+        generateFirstModal();
     }
     isFirstModalOpen = !isFirstModalOpen;
 }
@@ -48,7 +50,10 @@ function handleWorkClick(figureElement) {
 
 function generateFirstModal() {
 
-
+    if (document.querySelector('.First-modal')) {
+       
+        return;
+      }
     firstModalDiv = document.createElement('div');
     firstModalDiv.className = "First-modal";
     modal.appendChild(firstModalDiv);
@@ -73,8 +78,9 @@ function generateFirstModal() {
     btnOpenSecondModal.type = 'submit';
     btnOpenSecondModal.className = 'btn-add-photo';
     btnOpenSecondModal.value = 'Ajouter une photo';
+    btnsContainer.appendChild(btnOpenSecondModal);
 
-    btnOpenSecondModal.addEventListener('click', generateSecondModal());
+  
 
     const deleteWorkBtn = document.createElement('a');
 
@@ -144,7 +150,7 @@ function generateFirstModal() {
 
 
 
-    btnsContainer.appendChild(btnOpenSecondModal);
+
 
     btnOpenSecondModal.addEventListener('click', () => {
         // Ouvrir la nouvelle page modal générée par la fonction
@@ -153,13 +159,7 @@ function generateFirstModal() {
     if (!btnOpenSecondModal) {
         btnsContainer.appendChild(btnOpenSecondModal);
     }
-    btnOpenSecondModal.addEventListener('click', () => {
-        generateSecondModal();
-    });
-
-
-
-
+    btnOpenSecondModal.addEventListener('click', generateSecondModal);
 
     if (!btnsContainer.querySelector('.btn-delete-work')) {
         const deleteLInk = document.createElement('a');
@@ -176,10 +176,16 @@ function generateFirstModal() {
 }
 
 const btnOpenFirstModal = document.querySelector('.a-modifier');
-btnOpenFirstModal.addEventListener('click', generateFirstModal());
+btnOpenFirstModal.addEventListener('click', ()=>{generateFirstModal()});
 
 
-   
+
+
+
+
+
+
+
 
 
 
@@ -260,8 +266,8 @@ function generateSecondModal() {
     btnModal.type = 'submit';
     btnModal.className = 'btn-add-photo';
     btnModal.textContent = 'Ajouter une photo';
-   
-    btnModal.addEventListener('click', () => toggleModal());
+
+    btnModal.addEventListener('click', toggleModal);
     // Ajoute les éléments créés à la modal
 
     inputPhoto.appendChild(labelInputPhoto);
@@ -347,6 +353,7 @@ function generateSecondModal() {
         });
     }
     secondModalDiv.innerHTML = "";
+    toggleModal();
 
 }
 
