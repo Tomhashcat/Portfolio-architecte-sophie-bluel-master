@@ -46,7 +46,7 @@ function generateFirstModal() {
 
     const modalTitre = document.createElement('h3');
     modalTitre.className = 'modal_Tiltle';
-    modalTitre.textContent = 'Ajout photo';
+    modalTitre.textContent = 'Gallerie Photo';
     modal.appendChild(modalTitre);
 
     const btnsContainer = document.createElement('div');
