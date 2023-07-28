@@ -14,21 +14,21 @@ function toggleModal() {
 
         secondModalDiv.style.display = 'none';
         firstModalDiv.style.display = 'flex';
-
-
-
-
-
     } else {
         mod.style.display = "flex";
         modal.style.display = "flex";
-        firstModalDiv.style.display = 'none';
-        secondModalDiv.style.display = 'flex';
+        firstModalDiv.style.display = 'flex';
+        secondModalDiv.style.display = 'none';
         if (!firstModalDiv) {
             generateFirstModal();
         }
 
     }
+
+
+
+
+
     isFirstModalOpen = !isFirstModalOpen;
 }
 
@@ -161,7 +161,7 @@ function generateFirstModal() {
 
     btnOpenSecondModal.addEventListener('click', () => {
         // Ouvrir la nouvelle page modal générée par la fonction
-        generateSecondModal();
+        toggleModal();
     });
     if (!btnOpenSecondModal) {
         btnsContainer.appendChild(btnOpenSecondModal);
@@ -217,17 +217,19 @@ btnOpenFirstModal.addEventListener('click', () => {
 function generateSecondModal() {
 
 
-   firstModalDiv.innerHTML="";
+
 
 
     if (!secondModalDiv) { // Vérifiez si la div n'est pas déjà créée
         secondModalDiv = document.createElement('div');
         secondModalDiv.className = "seconde-modal";
-      
+
+    }
+    if (firstModalDiv) {
+        firstModalDiv.style.display = 'none';
     }
 
-
-  modal.appendChild(secondModalDiv);
+    modal.appendChild(secondModalDiv);
 
     const secondeModalTitre = document.createElement('h3');
     secondeModalTitre.className = 'modal_Tiltle';
@@ -365,7 +367,7 @@ function generateSecondModal() {
             secondeModal.style.display = 'none';
         });
     }
-  
+
 
 
 }
