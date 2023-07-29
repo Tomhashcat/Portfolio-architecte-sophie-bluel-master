@@ -440,8 +440,9 @@ function deleteWork(workId) {
 }
 
 function ajouterTravailALaBaseDeDonnees(file) {
-    const formData = new FormData();
-    FormData.append('image', file);
+    const formData = new FormData(); // Créez un nouvel objet FormData
+
+    formData.append('image', file); // Utilisez la méthode append pour ajouter le fichier
 
     fetch('http://localhost:5678/api/works', {
         method: 'POST',
@@ -452,16 +453,15 @@ function ajouterTravailALaBaseDeDonnees(file) {
         },
         body: formData,
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Travail ajouté avec succès:', data);
-            // Vous pouvez également effectuer des actions supplémentaires après avoir ajouté le travail
-        })
-        .catch(error => {
-            console.error('Une erreur s\'est produite lors de l\'ajout du travail:', error);
-            // Gérez les erreurs ici, affichez des messages d'erreur, etc.
-        });
-
+    .then(response => response.json())
+    .then(data => {
+        console.log('Travail ajouté avec succès:', data);
+        // Vous pouvez également effectuer des actions supplémentaires après avoir ajouté le travail
+    })
+    .catch(error => {
+        console.error('Une erreur s\'est produite lors de l\'ajout du travail:', error);
+        // Gérez les erreurs ici, affichez des messages d'erreur, etc.
+    });
 }
 
 
