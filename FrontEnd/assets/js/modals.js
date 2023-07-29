@@ -180,7 +180,7 @@ btnOpenFirstModal.addEventListener('click', () => {
 
 function generateSecondModal() {
 
-
+  
 
 
 
@@ -195,12 +195,24 @@ function generateSecondModal() {
 
     modal.appendChild(secondModalDiv);
 
+    
+    const modalClose = document.createElement('a');
+    modalClose.className = "modal_close";
+    modalClose.textContent = "x";
+   secondModalDiv.appendChild(modalClose);
+    modalClose.addEventListener('click', () => {
+        // Fermez la modal en masquant le div firstModalDiv
+        secondModalDiv.style.display = 'none';
+        // Assurez-vous également de réinitialiser la sélection des travaux
+        selectedWorkIds = [];
+
+        // Redirigez l'utilisateur vers "index.html"
+        window.location.href = "index.html";
+    });
     const secondeModalTitre = document.createElement('h3');
     secondeModalTitre.className = 'modal_Tiltle';
     secondeModalTitre.textContent = "Ajouter une photo";
     secondModalDiv.appendChild(secondeModalTitre);
-
-
 
     // Créez les éléments pour la nouvelle modal et les éléments nécessaires
     const uploadPhotoContainer = document.createElement('div');
@@ -209,6 +221,8 @@ function generateSecondModal() {
 
 
     secondModalDiv.appendChild(uploadPhotoContainer);
+
+    
 
     const inputChoiceContent = document.createElement('div');
     inputChoiceContent.className = 'inputs-seconde-modal-choices';
