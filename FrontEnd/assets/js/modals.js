@@ -51,15 +51,15 @@ function generateFirstModal() {
     modalClose.className = "modal_close";
     modalClose.textContent = "x";
     firstModalDiv.appendChild(modalClose);
-modalClose.addEventListener('click', () => {
-    // Fermez la modal en masquant le div firstModalDiv
-    firstModalDiv.style.display = 'none';
-    // Assurez-vous également de réinitialiser la sélection des travaux
-    selectedWorkIds = [];
+    modalClose.addEventListener('click', () => {
+        // Fermez la modal en masquant le div firstModalDiv
+        firstModalDiv.style.display = 'none';
+        // Assurez-vous également de réinitialiser la sélection des travaux
+        selectedWorkIds = [];
 
-    // Redirigez l'utilisateur vers "index.html"
-    window.location.href = "index.html";
-}); 
+        // Redirigez l'utilisateur vers "index.html"
+        window.location.href = "index.html";
+    });
 
     const griseBar = document.createElement('div');
     griseBar.className = 'grise-bar';
@@ -92,9 +92,9 @@ modalClose.addEventListener('click', () => {
     deleteWorkBtn.textContent = 'Supprimer les travaux';
     btnsContainer.appendChild(deleteWorkBtn);
 
-    deleteWorkBtn.addEventListener('click',handleDeleteButtonClick  );
-      
-  
+    deleteWorkBtn.addEventListener('click', handleDeleteButtonClick);
+
+
 
 
 
@@ -115,20 +115,20 @@ modalClose.addEventListener('click', () => {
                 image.alt = work.title;
                 figure.appendChild(image);
 
-            const  workId= work.id;
+                const workId = work.id;
 
                 const trashIcon = document.createElement('i');
-                trashIcon.className = 'fas fa-trash-can'; 
+                trashIcon.className = 'fas fa-trash-can';
                 figure.appendChild(trashIcon);
-            
+
                 const figcaption = document.createElement('figcaption');
                 figcaption.textContent = work.title;
                 figure.appendChild(figcaption);
                 figure.setAttribute('data-workid', workId);
-            
+
                 // Ajouter l'événement de clic pour la suppression des œuvres
                 figure.addEventListener('click', () => handleWorkClick(figure));
-            
+
                 modGalleryContainer.appendChild(figure);
             });
         })
@@ -151,7 +151,7 @@ modalClose.addEventListener('click', () => {
     });
 
 
-      
+
     if (!btnOpenSecondModal) {
         btnsContainer.appendChild(btnOpenSecondModal);
     }
@@ -205,6 +205,9 @@ function generateSecondModal() {
     // Créez les éléments pour la nouvelle modal et les éléments nécessaires
     const uploadPhotoContainer = document.createElement('div');
     uploadPhotoContainer.className = "upload-photo-container";
+
+
+
     secondModalDiv.appendChild(uploadPhotoContainer);
 
     const inputChoiceContent = document.createElement('div');
@@ -215,12 +218,19 @@ function generateSecondModal() {
     inputPhoto.className = 'input-File-Seconde-Modal';
     inputPhoto.type = 'file';
     inputPhoto.accept = 'image/*';
+    inputPhoto.id = 'fileInput';
 
-    const labelInputPhoto = document.createElement('label');
-    labelInputPhoto.textContent = '+ Ajouter une photo';
+    const labelPhoto = document.createElement('label');
+    labelPhoto.htmlFor = 'fileInput';
+    labelPhoto.id = 'customFileInput'; // Vous pouvez également supprimer cet ID s'il n'est pas utilisé ailleurs
+    labelPhoto.className = 'label-custom';
+    labelPhoto.textContent = '+ Ajouter une photo';
+
+    inputPhoto.appendChild(labelPhoto);
 
     const btnValider = document.createElement('div');
     btnValider.className = "btn-valider";
+    btnValider.textContent="valider";
     secondModalDiv.appendChild(btnValider);
 
 
@@ -249,7 +259,7 @@ function generateSecondModal() {
     btnModal.addEventListener('click', toggleModal);
     // Ajoute les éléments créés à la modal
 
-    inputPhoto.appendChild(labelInputPhoto);
+  
     uploadPhotoContainer.appendChild(inputPhoto);
 
     inputChoiceContent.appendChild(labelTitre);
@@ -339,7 +349,7 @@ function generateSecondModal() {
 function handleWorkClick(figureElement) {
     const workId = figureElement.dataset.workId;
     if (selectedWorkIds.includes(workId)) {
-        
+
         const index = selectedWorkIds.indexOf(workId);
         if (index > -1) {
             selectedWorkIds.splice(index, 1);
@@ -352,51 +362,51 @@ function handleWorkClick(figureElement) {
         // Appliquer un style visuel pour indiquer qu'un work est sélectionné
         figureElement.classList.add('selected-work');
     }
-  
+
 }
 
 function handleDeleteButtonClick() {
-   
-   
-       
+
+
+
     if (selectedWorkIds.length > 0) {
-        
+
         selectedWorkIds.forEach(workId => {
             deleteWork(workId);
-            console.log('workId',workId)
+            console.log('workId', workId)
         });
-       
+
         selectedWorkIds = [];
         generateFirstModal();
     } else {
         console.log("Aucun travail sélectionné pour la suppression");
     }
 
-    
+
     generateFirstModal();
 }
 function deleteWork(workId) {
 
-   
-    const headers= {
-            "accept": "*/*",
-            "Authorization": "Bearer " + token,
-            "User-Id":userId
-        }
+
+    const headers = {
+        "accept": "*/*",
+        "Authorization": "Bearer " + token,
+        "User-Id": userId
+    }
     fetch(`http://localhost:5678/api/works/${workId}`,
-     {
-        method: 'DELETE',
-        headers: headers
-       
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Œuvre supprimée avec succès:', data);
-        generateFirstModal();
-    })
-    .catch(error => {
-        console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
-    });
+        {
+            method: 'DELETE',
+            headers: headers
+
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Œuvre supprimée avec succès:', data);
+            generateFirstModal();
+        })
+        .catch(error => {
+            console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
+        });
 }
 
 
