@@ -7,6 +7,7 @@ var firstModalDiv;
 var secondModalDiv;
 
 let selectedWorkIds = [];
+
 function toggleModal() {
 
     if (isFirstModalOpen) {
@@ -20,8 +21,8 @@ function toggleModal() {
         modal.style.display = "flex";
         firstModalDiv.style.display = 'none';
         secondModalDiv.style.display = 'flex';
-        if (!firstModalDiv) {
-            generateFirstModal();
+        if (!secondModalDiv) { // Check if the second modal is not already created
+            generateSecondModal();
         }
 
     }
@@ -150,10 +151,7 @@ modalClose.addEventListener('click', () => {
     });
 
 
-       btnOpenSecondModal.addEventListener('click', () => {
-        // Ouvrir la nouvelle page modal générée par la fonction
-        toggleModal();
-    });
+      
     if (!btnOpenSecondModal) {
         btnsContainer.appendChild(btnOpenSecondModal);
     }
@@ -189,7 +187,7 @@ function generateSecondModal() {
     if (!secondModalDiv) { // Vérifiez si la div n'est pas déjà créée
         secondModalDiv = document.createElement('div');
         secondModalDiv.className = "seconde-modal";
-
+        secondModalDiv.style.display = 'flex';
     }
     if (firstModalDiv) {
         firstModalDiv.style.display = 'none';
@@ -339,9 +337,9 @@ function generateSecondModal() {
 }
 
 function handleWorkClick(figureElement) {
-    const workId = figureElement.dataset.workid;
+    const workId = figureElement.dataset.workId;
     if (selectedWorkIds.includes(workId)) {
-        // Le workId est déjà sélectionné, donc le supprimer de la liste
+        
         const index = selectedWorkIds.indexOf(workId);
         if (index > -1) {
             selectedWorkIds.splice(index, 1);
@@ -360,20 +358,21 @@ function handleWorkClick(figureElement) {
 function handleDeleteButtonClick() {
    
    
-       // Vérifier s'il y a des œuvres sélectionnées pour la suppression
+       
     if (selectedWorkIds.length > 0) {
-        // Supprimer les œuvres en parcourant la liste des IDs sélectionnés
+        
         selectedWorkIds.forEach(workId => {
             deleteWork(workId);
+            console.log('workId',workId)
         });
-        // Vider la liste des workIds sélectionnés après la suppression
+       
         selectedWorkIds = [];
         generateFirstModal();
     } else {
         console.log("Aucun travail sélectionné pour la suppression");
     }
 
-    // Mettez à jour la première modal pour refléter les changements (rechargez les works)
+    
     generateFirstModal();
 }
 function deleteWork(workId) {
@@ -384,7 +383,8 @@ function deleteWork(workId) {
             "Authorization": "Bearer " + token,
             "User-Id":userId
         }
-    fetch(`http://localhost:5678/api/works/${workId}`, {
+    fetch(`http://localhost:5678/api/works/${workId}`,
+     {
         method: 'DELETE',
         headers: headers
        
