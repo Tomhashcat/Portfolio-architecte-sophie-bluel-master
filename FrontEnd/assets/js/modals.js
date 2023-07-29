@@ -50,7 +50,15 @@ function generateFirstModal() {
     modalClose.className = "modal_close";
     modalClose.textContent = "x";
     firstModalDiv.appendChild(modalClose);
+modalClose.addEventListener('click', () => {
+    // Fermez la modal en masquant le div firstModalDiv
+    firstModalDiv.style.display = 'none';
+    // Assurez-vous également de réinitialiser la sélection des travaux
+    selectedWorkIds = [];
 
+    // Redirigez l'utilisateur vers "index.html"
+    window.location.href = "index.html";
+}); 
 
     const griseBar = document.createElement('div');
     griseBar.className = 'grise-bar';
@@ -80,11 +88,12 @@ function generateFirstModal() {
     const deleteWorkBtn = document.createElement('a');
 
     deleteWorkBtn.className = ('btn-delete-work');
-   
+    deleteWorkBtn.textContent = 'Supprimer les travaux';
+    btnsContainer.appendChild(deleteWorkBtn);
 
-    deleteWorkBtn.addEventListener('click',()=>{
-    const workIdToDelete = figureElement.dataset.workid;
-    handleDeleteButtonClick(workIdToDelete);});
+    deleteWorkBtn.addEventListener('click',handleDeleteButtonClick  );
+      
+  
 
 
 
@@ -141,25 +150,7 @@ function generateFirstModal() {
     });
 
 
-    deleteWorkBtn.addEventListener('click', () => {
-        const workIdToDelete = selectedWorkIds[0];
-        if (workIdToDelete) {
-            handleDeleteButtonClick(workIdToDelete);
-        } else {
-            console.log("Aucun travail sélectionné pour la suppression");
-        }
-    });
-
-
-
-
-
-
-
-
-
-
-    btnOpenSecondModal.addEventListener('click', () => {
+       btnOpenSecondModal.addEventListener('click', () => {
         // Ouvrir la nouvelle page modal générée par la fonction
         toggleModal();
     });
@@ -363,11 +354,11 @@ function handleWorkClick(figureElement) {
         // Appliquer un style visuel pour indiquer qu'un work est sélectionné
         figureElement.classList.add('selected-work');
     }
-    handleDeleteButtonClick(workId);
+  
 }
 
-function handleDeleteButtonClick(workId) {
-    deleteWork(workId);
+function handleDeleteButtonClick() {
+   
    
        // Vérifier s'il y a des œuvres sélectionnées pour la suppression
     if (selectedWorkIds.length > 0) {
@@ -377,6 +368,7 @@ function handleDeleteButtonClick(workId) {
         });
         // Vider la liste des workIds sélectionnés après la suppression
         selectedWorkIds = [];
+        generateFirstModal();
     } else {
         console.log("Aucun travail sélectionné pour la suppression");
     }
@@ -385,17 +377,22 @@ function handleDeleteButtonClick(workId) {
     generateFirstModal();
 }
 function deleteWork(workId) {
+
+   
+    const headers= {
+            "accept": "*/*",
+            "Authorization": "Bearer " + token,
+            "User-Id":userId
+        }
     fetch(`http://localhost:5678/api/works/${workId}`, {
         method: 'DELETE',
-        headers: {
-            "accept": "*/*",
-            "Authorization": "Bearer " + token // Assurez-vous que 'token' est défini ou remplacez-le par le token valide
-        }
+        headers: headers
+       
     })
     .then(response => response.json())
     .then(data => {
         console.log('Œuvre supprimée avec succès:', data);
-        // Vous pouvez effectuer des actions supplémentaires ici après la suppression réussie
+        generateFirstModal();
     })
     .catch(error => {
         console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);

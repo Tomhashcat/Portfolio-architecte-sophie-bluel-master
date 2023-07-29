@@ -415,6 +415,7 @@ li:hover {
 	margin-top: 20px;
 	text-align: end;
 	margin-left: 80%;
+	cursor: pointer;
 }
 
 .mod-gallery {
@@ -560,7 +561,7 @@ li:hover {
 
 .btn-delete-work {
 	color: red;
-
+cursor: pointer;
 	text-decoration: none;
 }
 
