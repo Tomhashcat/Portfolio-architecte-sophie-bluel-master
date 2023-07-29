@@ -476,21 +476,23 @@ li:hover {
 }
 
 .input-File-Seconde-Modal {
-	
-	width: 173px;
-	height: 36px;
-	border-radius: 60px;
-	border: none;
-	margin-top: 30px;
-	background-color: #dcdcdc;
-	position: absolute;
-	display: inline-block; 
+	position: relative; /* Pour permettre le positionnement du label */
+  display: inline-block;
 }
-.label-custom{
+.custom-file-input{
 	display: inline-block;
-	z-index: 1;
+  background-color: #bec3be;
+  position: absolute;
+  margin-top: 15%;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
 }
-
+#fileInput {
+	display: none;
+  }
 .inputs-seconde-modal-choices {
 	display: flex;
 	flex-wrap: wrap;

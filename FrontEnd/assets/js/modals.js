@@ -223,14 +223,14 @@ function generateSecondModal() {
     const labelPhoto = document.createElement('label');
     labelPhoto.htmlFor = 'fileInput';
     labelPhoto.id = 'customFileInput'; // Vous pouvez également supprimer cet ID s'il n'est pas utilisé ailleurs
-    labelPhoto.className = 'label-custom';
+    labelPhoto.className = 'custom-file-input';
     labelPhoto.textContent = '+ Ajouter une photo';
 
-    inputPhoto.appendChild(labelPhoto);
+    uploadPhotoContainer.appendChild(labelPhoto);
 
     const btnValider = document.createElement('div');
     btnValider.className = "btn-valider";
-    btnValider.textContent="valider";
+    btnValider.textContent = "valider";
     secondModalDiv.appendChild(btnValider);
 
 
@@ -259,7 +259,7 @@ function generateSecondModal() {
     btnModal.addEventListener('click', toggleModal);
     // Ajoute les éléments créés à la modal
 
-  
+
     uploadPhotoContainer.appendChild(inputPhoto);
 
     inputChoiceContent.appendChild(labelTitre);
