@@ -497,7 +497,7 @@ li:hover {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
-	margin-top: 56%;
+	margin-top: 43%;
 
 
 }
@@ -528,12 +528,19 @@ li:hover {
 	box-shadow: 0px 4px 14px 0px #00000017;
 
 }
-
+.image-preview{
+	width: 420px;
+	height: 169px;position: absolute;
+	margin-bottom: 20%;
+}
 .btn-envoyer {
+	
 	display: flex;
 	justify-content: center;
 }
-
+.btn-actif{
+	background-color: #1D6154 ;
+}
 .btn-add-work {
 
 	margin-top: 10px;

@@ -5,7 +5,7 @@ var modal = document.querySelector('.modal');
 
 var firstModalDiv;
 var secondModalDiv;
-
+var boutonEnvoyer;
 let selectedWorkIds = [];
 
 function toggleModal() {
@@ -180,7 +180,7 @@ btnOpenFirstModal.addEventListener('click', () => {
 
 function generateSecondModal() {
 
-  
+
 
 
 
@@ -195,11 +195,11 @@ function generateSecondModal() {
 
     modal.appendChild(secondModalDiv);
 
-    
+
     const modalClose = document.createElement('a');
     modalClose.className = "modal_close";
     modalClose.textContent = "x";
-   secondModalDiv.appendChild(modalClose);
+    secondModalDiv.appendChild(modalClose);
     modalClose.addEventListener('click', () => {
         // Fermez la modal en masquant le div firstModalDiv
         secondModalDiv.style.display = 'none';
@@ -222,7 +222,7 @@ function generateSecondModal() {
 
     secondModalDiv.appendChild(uploadPhotoContainer);
 
-    
+
 
     const inputChoiceContent = document.createElement('div');
     inputChoiceContent.className = 'inputs-seconde-modal-choices';
@@ -245,6 +245,7 @@ function generateSecondModal() {
     const btnValider = document.createElement('div');
     btnValider.className = "btn-valider";
     btnValider.textContent = "valider";
+    btnValider.disable = true;
     secondModalDiv.appendChild(btnValider);
 
 
@@ -285,13 +286,18 @@ function generateSecondModal() {
 
 
 
-    const divEnvoyer = document.createElement('div');
-    divEnvoyer.className = 'inputChoiceContent';
-    const boutonEnvoyer = document.createElement('button');
-    boutonEnvoyer.className = 'btn-add-work';
-    boutonEnvoyer.textContent = 'Valider';
-    boutonEnvoyer.disabled = true;
-    divEnvoyer.appendChild(boutonEnvoyer);
+
+    btnValider.addEventListener('click', (event) => {
+        event.preventDefault();
+        const file = inputPhoto.files[0]; // Récupérer le fichier sélectionné
+        if (file) {
+            ajouterTravailALaBaseDeDonnees(file);
+            console.log("Nouveau travail ajouté !");
+
+        }
+    });
+
+
     if (!btnModal) {
         var btnsContainer = document.createElement('div');
         btnsContainer.className = 'btns-container';
@@ -329,21 +335,31 @@ function generateSecondModal() {
         const file = inputPhoto.files[0]; // Récupérer le fichier sélectionné
         if (file) {
             // Active le bouton d'ajout de travail s'il y a un fichier sélectionné
-            boutonEnvoyer.disabled = false;
+            btnValider.disabled = false;
+            btnValider.classList.add('btn-actif');
+            const imagePreview = document.createElement('img');
+            imagePreview.src = URL.createObjectURL(file);
+            imagePreview.className = 'image-preview';
+
+            const existingImagePreview = uploadPhotoContainer.querySelector('.image-preview');
+            if (existingImagePreview) {
+                uploadPhotoContainer.removeChild(existingImagePreview);
+
+            }
+            uploadPhotoContainer.appendChild(imagePreview);
         } else {
             // Désactive le bouton si aucun fichier n'est sélectionné
-            boutonEnvoyer.disabled = true;
+            btnValider.disabled = true;
+
+            const existingImagePreview = uploadPhotoContainer.querySelector('.image-preview');
+            if (existingImagePreview) {
+                uploadPhotoContainer.removeChild(existingImagePreview);
+            }
         }
     });
 
     // Ajoute l'écouteur d'événement pour le bouton "Ajouter le nouveau travail"
-    boutonEnvoyer.addEventListener('click', () => {
-        const file = inputPhoto.files[0]; // Récupérer le fichier sélectionné
-        if (file) {
-            console.log("Nouveau travail ajouté !");
-
-        }
-    });
+    
 
 
     const modalCloseLink = document.querySelector('.modal_close');
@@ -421,6 +437,31 @@ function deleteWork(workId) {
         .catch(error => {
             console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
         });
+}
+
+function ajouterTravailALaBaseDeDonnees(file) {
+    const formData = new FormData();
+    FormData.append('image', file);
+
+    fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+            "accept": "*/*",
+            "Authorization": "Bearer " + token,
+            "User-Id": userId
+        },
+        body: formData,
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Travail ajouté avec succès:', data);
+            // Vous pouvez également effectuer des actions supplémentaires après avoir ajouté le travail
+        })
+        .catch(error => {
+            console.error('Une erreur s\'est produite lors de l\'ajout du travail:', error);
+            // Gérez les erreurs ici, affichez des messages d'erreur, etc.
+        });
+
 }
 
 
