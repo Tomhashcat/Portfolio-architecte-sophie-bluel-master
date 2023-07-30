@@ -443,13 +443,14 @@ function ajouterTravailALaBaseDeDonnees(file) {
     const formData = new FormData(); // Créez un nouvel objet FormData
 
     formData.append('image', file); // Utilisez la méthode append pour ajouter le fichier
-
+    formData.append('title', 'Titre du travail'); // Remplacez 'Titre du travail' par le titre réel du travail
+    formData.append('category', 1)
     fetch('http://localhost:5678/api/works', {
         method: 'POST',
         headers: {
             "accept": "*/*",
             "Authorization": "Bearer " + token,
-            "User-Id": userId
+            
         },
         body: formData,
     })
