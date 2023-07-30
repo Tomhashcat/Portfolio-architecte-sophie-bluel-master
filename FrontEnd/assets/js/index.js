@@ -1,3 +1,22 @@
+var response;
+var works;
+var filteredWorks;
+var galleryContainer;
+var work;
+var figure;
+var image;
+var figcaption;
+var userId;
+var token;
+var btnModifier;
+var modeEdition;
+var filters;
+var buttonsFiltres;
+var response;
+var buttonTous;
+var categories;
+var categoryId;
+var filter;
 // Récupére les références des boutons et des éléments conteneurs
 
 
@@ -15,28 +34,28 @@ filterWorksByCat(0);
 
 // Fonction de filtrage des œuvres par catégorie
 async function filterWorksByCat(categoryId) {
-  const response = await fetch("http://localhost:5678/api/works");
-  const works = await response.json();
-  let filteredWorks = works;
+  response = await fetch("http://localhost:5678/api/works");
+  works = await response.json();
+  filteredWorks = works;
 
   if (categoryId !== 0) {
     filteredWorks = works.filter(work => work.categoryId === categoryId);
   }
 
-  const galleryContainer = document.querySelector(".gallery");
+  galleryContainer = document.querySelector(".gallery");
   galleryContainer.innerHTML = '';
 
   for (let index = 0; index < filteredWorks.length; index++) {
-    const work = filteredWorks[index];
+    work = filteredWorks[index];
 
-    const figure = document.createElement("figure");
-    const image = document.createElement("img");
+    figure = document.createElement("figure");
+    image = document.createElement("img");
 
     image.src = work.imageUrl;
     image.alt = work.title;
     figure.appendChild(image);
 
-    const figcaption = document.createElement("figcaption");
+    figcaption = document.createElement("figcaption");
     figcaption.textContent = work.title;
     figure.appendChild(figcaption);
 
@@ -47,50 +66,50 @@ async function filterWorksByCat(categoryId) {
 }
 
 
-  // Vérifier si  connecté 
-  const userId = localStorage.getItem('userId');
-  const token = localStorage.getItem('token');
+// Vérifier si  connecté 
+userId = localStorage.getItem('userId');
+token = localStorage.getItem('token');
 
-  const btnModifier = document.querySelector('.modifier');
-  const modeEdition = document.querySelector('.edition-mode')
-  // Vérifier si l'utilisateur est connecté 
-  if (userId && token) {
+btnModifier = document.querySelector('.modifier');
+modeEdition = document.querySelector('.edition-mode')
+// Vérifier si l'utilisateur est connecté 
+if (userId && token) {
 
-    console.log('Utilisateur connecté');
-    console.log('userId:', userId);
+  console.log('Utilisateur connecté');
+  console.log('userId:', userId);
 
-    loginButton.style.display = "none";
-    logoutButton.style.display = "block";
+  loginButton.style.display = "none";
+  logoutButton.style.display = "block";
 
-    modeEdition.style.display = 'flex';
-    btnModifier.style.display = 'block';
-  } else {
-    console.log('Utilisateur non connecté');
+  modeEdition.style.display = 'flex';
+  btnModifier.style.display = 'block';
+} else {
+  console.log('Utilisateur non connecté');
 
 
 
-    modeEdition.style.display = 'none';
-    btnModifier.style.display = 'none';
-  }
+  modeEdition.style.display = 'none';
+  btnModifier.style.display = 'none';
+}
 
 
 ;
 
 // Tableau des filtres
-const filters = [];
-const buttonsFiltres = [];
+filters = [];
+buttonsFiltres = [];
 
 
 async function displayCategories() {
 
   try {
-    const response = await fetch('http://localhost:5678/api/categories');
-    const categories = await response.json();
+    response = await fetch('http://localhost:5678/api/categories');
+    categories = await response.json();
 
     // Ajoute le filtre "Tous" au tableau des filtres
 
     filters.push({ text: 'Tous', className: 'Filter Filter-All', dataid: '0' });
-    const buttonTous = document.createElement('button');
+    buttonTous = document.createElement('button');
     buttonTous.textContent = 'Tous';
     buttonTous.className = 'Filter Filter-All';
     buttonTous.setAttribute('data-id', '0');
@@ -104,7 +123,7 @@ async function displayCategories() {
     // Ajoute les catégories au tableau des filtres
     categories.forEach((category, index) => {
 
-      const filter = {
+      filter = {
         text: category.name,
         className: `Filter`,
         dataid: category.id
@@ -124,12 +143,9 @@ async function displayCategories() {
 
 
       button.addEventListener('click', () => {
-        const categoryId = parseInt(button.getAttribute('data-id'));
+        categoryId = parseInt(button.getAttribute('data-id'));
         filterWorksByCat(categoryId);
       });
-
-
-
       button.textContent = filter.text;
       button.className = filter.className;
       button.setAttribute('data-id', filter.dataid);
@@ -139,18 +155,11 @@ async function displayCategories() {
       buttonsFiltres.push(button);
 
       button.addEventListener('click', () => {
-        const categoryId = parseInt(button.getAttribute('data-id'));
+        categoryId = parseInt(button.getAttribute('data-id'));
         filterWorksByCat(categoryId);
 
       });
-
-
-
-
-
     });
-
-
   } catch (error) {
     console.error("Une erreur s'est produite lors de la récupération des catégories :", error);
   }
@@ -167,6 +176,16 @@ logoutButton.addEventListener('click', handlLogout);
 
 
 displayCategories();
+
+
+
+
+
+
+
+
+
+
 
 
 
