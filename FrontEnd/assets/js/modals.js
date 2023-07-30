@@ -1,4 +1,6 @@
-
+/**
+ * DECLARATIONS DES VARIABLES
+ */
 let isFirstModalOpen = false;
 var mod = document.getElementById('mod');
 var modal = document.querySelector('.modal');
