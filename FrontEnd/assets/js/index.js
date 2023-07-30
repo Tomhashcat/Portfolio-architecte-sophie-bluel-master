@@ -17,9 +17,11 @@ var buttonTous;
 var categories;
 var categoryId;
 var filter;
-// Récupére les références des boutons et des éléments conteneurs
 
 
+/**
+ * RECUPERE LES BTNS
+ */
 var filtersContainer = document.querySelector('.Filters');
 var btnModal = document.querySelector('.modifier');
 var loginButton = document.querySelector('.div-login');
@@ -32,7 +34,10 @@ filterWorksByCat(0);
 
 
 
-// Fonction de filtrage des œuvres par catégorie
+/**
+ * 
+ * RECUPERE LES CATEGORIES DANS LA BDD 
+ */
 async function filterWorksByCat(categoryId) {
   response = await fetch("http://localhost:5678/api/works");
   works = await response.json();
@@ -58,21 +63,23 @@ async function filterWorksByCat(categoryId) {
     figcaption = document.createElement("figcaption");
     figcaption.textContent = work.title;
     figure.appendChild(figcaption);
-
-
-
-    galleryContainer.appendChild(figure);
+ galleryContainer.appendChild(figure);
   }
 }
 
 
-// Vérifier si  connecté 
+   
+
+
+// Vérifie si  connecté 
 userId = localStorage.getItem('userId');
 token = localStorage.getItem('token');
 
 btnModifier = document.querySelector('.modifier');
 modeEdition = document.querySelector('.edition-mode')
-// Vérifier si l'utilisateur est connecté 
+/**
+ * SI CONNECT2 GENERE DE NEWS HTML
+ *  */ 
 if (userId && token) {
 
   console.log('Utilisateur connecté');
@@ -85,21 +92,23 @@ if (userId && token) {
   btnModifier.style.display = 'block';
 } else {
   console.log('Utilisateur non connecté');
-
-
-
   modeEdition.style.display = 'none';
   btnModifier.style.display = 'none';
-}
+};
 
 
-;
+
+
+
+
 
 // Tableau des filtres
 filters = [];
 buttonsFiltres = [];
 
-
+/**
+ * ATTRIBUT UN BUTTON POUR CHAQUE CAT
+ */
 async function displayCategories() {
 
   try {
@@ -116,12 +125,12 @@ async function displayCategories() {
     filtersContainer.appendChild(buttonTous);
     buttonsFiltres.push(buttonTous);
 
-    // Ajouter l'événement click pour le bouton "Tous"
+    //événement click pour le bouton "Tous"
     buttonTous.addEventListener('click', () => {
       filterWorksByCat(0);
     });
     // Ajoute les catégories au tableau des filtres
-    categories.forEach((category, index) => {
+    categories.forEach((category) => {
 
       filter = {
         text: category.name,
@@ -164,7 +173,9 @@ async function displayCategories() {
     console.error("Une erreur s'est produite lors de la récupération des catégories :", error);
   }
 }
-
+/**
+ * LOGOUT
+ */
 function handlLogout() {
   localStorage.removeItem('userId');
   localStorage.removeItem('token');
