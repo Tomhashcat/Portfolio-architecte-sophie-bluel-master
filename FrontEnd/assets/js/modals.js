@@ -22,7 +22,7 @@ var figcaption;
 var figureElement;
 var deleteLInk;
 var btnOpenFirstModal;
-var token;
+var  token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDgyMDQwNywiZXhwIjoxNjkwOTA2ODA3fQ.Kyk3Qz68pTZWVs2EJ-DmiNKdVlpkNpxLMXz3wl2v5uY";
 var uploadPhotoContainer;
 var file;
 var inputPhoto;
@@ -488,7 +488,7 @@ function handleDeleteButtonClick() {
  * @param {OBJ} workId 
  */
 function deleteWork(workId) {
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDgyMDQwNywiZXhwIjoxNjkwOTA2ODA3fQ.Kyk3Qz68pTZWVs2EJ-DmiNKdVlpkNpxLMXz3wl2v5uY";
+   
     headers = {
 
         "Authorization": "Bearer " + token,
