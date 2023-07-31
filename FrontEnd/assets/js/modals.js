@@ -4,7 +4,7 @@
 let isFirstModalOpen = false;
 var mod = document.getElementById('mod');
 var modal = document.querySelector('.modal');
-var modalClose;
+//var modalClose;
 var firstModalDiv;
 var secondModalDiv;
 var secondeModalTitre;
@@ -22,7 +22,7 @@ var figcaption;
 var figureElement;
 var deleteLInk;
 var btnOpenFirstModal;
-var  token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDgyMDQwNywiZXhwIjoxNjkwOTA2ODA3fQ.Kyk3Qz68pTZWVs2EJ-DmiNKdVlpkNpxLMXz3wl2v5uY";
+
 var uploadPhotoContainer;
 var file;
 var inputPhoto;
@@ -79,7 +79,7 @@ function generateFirstModal() {
     firstModalDiv.className = "First-modal";
     modal.appendChild(firstModalDiv);
 
-    modalClose = document.createElement('a');
+    let modalClose = document.createElement('a');
     modalClose.className = "modal_close";
     modalClose.textContent = "x";
     firstModalDiv.appendChild(modalClose);
@@ -121,7 +121,7 @@ function generateFirstModal() {
 
 
     deleteWorkBtn = document.createElement('a');
-
+    deleteWorkBtn.setAttribute("href", "#");
     deleteWorkBtn.className = ('btn-delete-work');
     deleteWorkBtn.textContent = 'Supprimer les travaux';
     btnsContainer.appendChild(deleteWorkBtn);
@@ -205,9 +205,9 @@ function generateFirstModal() {
         deleteLInk.textContent = 'supprimer la galerie';
         deleteLInk.className = 'btn-delete-work';
         btnsContainer.appendChild(deleteLInk);
-        deleteLInk.addEventListener('click', () => {
+        deleteLInk.addEventListener('click',  generateFirstModal())
 
-        })
+
     }
 
 
@@ -251,7 +251,7 @@ function generateSecondModal() {
         toggleModal();
     });
 
-    modalClose = document.createElement('a');
+    let modalClose = document.createElement('a');
     modalClose.className = "modal_close";
     modalClose.textContent = "x";
     secondModalDiv.appendChild(modalClose);
@@ -483,33 +483,7 @@ function handleDeleteButtonClick() {
 
 
 
-/**
- * SUPPRIME LA SELECTION SOUS CONDITIONS(GERE PAR LE FECTH ET HANDLECLICK)
- * @param {OBJ} workId 
- */
-function deleteWork(workId) {
-   
-    headers = {
 
-        "Authorization": "Bearer " + token,
-
-    }
-    fetch(`http://localhost:5678/api/works/${workId}`,
-        {
-            method: 'DELETE',
-            headers: headers
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Œuvre supprimée avec succès:', data);
-
-        })
-        .catch(error => {
-            console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
-
-        });
-
-}
 
 
 
@@ -521,13 +495,13 @@ function ajouterTravailALaBaseDeDonnees(file, workTitle, categoryId) {
     const reader = new FileReader();
 
     reader.onloadend = function () {
-        const imageBase64 = reader.result.split(',')[1];
+       
 
         const formData = new FormData(); // Créez un nouvel objet FormData
         /**
          * AJOUTE LE TAVAIL AVEC APPEND
          */
-        formData.append('image', imageBase64);
+        formData.append('image',file);
         formData.append('title', workTitle);
         formData.append('categoryId', categoryId);
         fetch('http://localhost:5678/api/works', {
