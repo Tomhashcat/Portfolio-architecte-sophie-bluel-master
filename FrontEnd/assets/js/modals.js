@@ -22,6 +22,7 @@ var figcaption;
 var figureElement;
 var deleteLInk;
 var btnOpenFirstModal;
+var token;
 var uploadPhotoContainer;
 var file;
 var inputPhoto;
@@ -34,7 +35,7 @@ var selectCategories;
 var labelCategories;
 var btnModal;
 var imagePreview;
-var btnsContainer;
+
 var option;
 var existingImagePreview;
 var modalCloseLink;
@@ -441,7 +442,9 @@ function generateSecondModal() {
  * @param {HTMLELEMENT} figureElement 
  */
 function handleWorkClick(figureElement) {
-    const workId = figureElement.dataset.workId;
+
+    const workId = figureElement.dataset.workid;
+    
     if (selectedWorkIds.includes(workId)) {
 
         const index = selectedWorkIds.indexOf(workId);
@@ -485,8 +488,8 @@ function handleDeleteButtonClick() {
  * @param {OBJ} workId 
  */
 function deleteWork(workId) {
-  
-  const headers = {
+  token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDgyMDQwNywiZXhwIjoxNjkwOTA2ODA3fQ.Kyk3Qz68pTZWVs2EJ-DmiNKdVlpkNpxLMXz3wl2v5uY";
+ headers = {
         
         "Authorization": "Bearer " + token,
        
@@ -496,13 +499,14 @@ function deleteWork(workId) {
             method: 'DELETE',
             headers: headers
         })
-       
+        
         .then(data => {
             console.log('Œuvre supprimée avec succès:', data);
-            generateFirstModal();
+           generateFirstModal();
         })
         .catch(error => {
             console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
+            
         });
         
 }
