@@ -472,11 +472,11 @@ function handleDeleteButtonClick() {
             console.log('workId', workId)
         });
         selectedWorkIds = [];
-        generateFirstModal();
+       
     } else {
         console.log("Aucun travail sélectionné pour la suppression");
     }
-    generateFirstModal();
+  
 }
 
 
@@ -499,10 +499,10 @@ function deleteWork(workId) {
             method: 'DELETE',
             headers: headers
         })
-        
+         .then(response => response.json())
         .then(data => {
             console.log('Œuvre supprimée avec succès:', data);
-           generateFirstModal();
+           
         })
         .catch(error => {
             console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
@@ -543,71 +543,6 @@ function ajouterTravailALaBaseDeDonnees(file) {
             // Gérez les erreurs ici, affichez des messages d'erreur, etc.
         });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
