@@ -544,11 +544,12 @@ li:hover {
 	margin-bottom: 20%;
 }
 .btn-envoyer {
-	
+	cursor:pointer;
 	display: flex;
 	justify-content: center;
 }
 .btn-actif{
+	cursor: pointer;
 	background-color: #1D6154 ;
 }
 .btn-add-work {

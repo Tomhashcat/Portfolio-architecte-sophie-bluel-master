@@ -244,12 +244,12 @@ function generateSecondModal() {
     /**
      * GENERE LE HTML DE LA SECONDE MODAL
      */
-    backArrow=document.createElement('i');
-    backArrow.className="fa-solid fa-arrow-left";
+    backArrow = document.createElement('i');
+    backArrow.className = "fa-solid fa-arrow-left";
     secondModalDiv.appendChild(backArrow);
     backArrow.addEventListener('click', () => {
         toggleModal();
-      });
+    });
 
     modalClose = document.createElement('a');
     modalClose.className = "modal_close";
@@ -296,9 +296,9 @@ function generateSecondModal() {
 
     uploadPhotoContainer.appendChild(labelPhoto);
 
-    pAddPhoto=document.createElement('p');
-    pAddPhoto.className='pAddPhoto';
-    pAddPhoto.textContent='jpg, pnj : 4mo max.'
+    pAddPhoto = document.createElement('p');
+    pAddPhoto.className = 'pAddPhoto';
+    pAddPhoto.textContent = 'jpg, pnj : 4mo max.'
     uploadPhotoContainer.appendChild(pAddPhoto);
 
     griseBar = document.createElement('div');
@@ -444,7 +444,7 @@ function generateSecondModal() {
 function handleWorkClick(figureElement) {
 
     const workId = figureElement.dataset.workid;
-    
+
     if (selectedWorkIds.includes(workId)) {
 
         const index = selectedWorkIds.indexOf(workId);
@@ -472,11 +472,11 @@ function handleDeleteButtonClick() {
             console.log('workId', workId)
         });
         selectedWorkIds = [];
-       
+
     } else {
         console.log("Aucun travail sélectionné pour la suppression");
     }
-  
+
 }
 
 
@@ -488,30 +488,30 @@ function handleDeleteButtonClick() {
  * @param {OBJ} workId 
  */
 function deleteWork(workId) {
-  token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDgyMDQwNywiZXhwIjoxNjkwOTA2ODA3fQ.Kyk3Qz68pTZWVs2EJ-DmiNKdVlpkNpxLMXz3wl2v5uY";
- headers = {
-        
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDgyMDQwNywiZXhwIjoxNjkwOTA2ODA3fQ.Kyk3Qz68pTZWVs2EJ-DmiNKdVlpkNpxLMXz3wl2v5uY";
+    headers = {
+
         "Authorization": "Bearer " + token,
-       
+
     }
     fetch(`http://localhost:5678/api/works/${workId}`,
         {
             method: 'DELETE',
             headers: headers
         })
-         .then(response => response.json())
+        .then(response => response.json())
         .then(data => {
             console.log('Œuvre supprimée avec succès:', data);
-           
+
         })
         .catch(error => {
             console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
-            
+
         });
-        
+
 }
 
-  
+
 
 /**
  * AJOUTE A LA BASE DE DONNEE
@@ -519,16 +519,17 @@ function deleteWork(workId) {
  */
 function ajouterTravailALaBaseDeDonnees(file) {
     const formData = new FormData(); // Créez un nouvel objet FormData
-/**
- * AJOUTE LE TAVAIL AVEC APPEND
- */
-    formData.append('image', file); 
-    formData.append('title', 'Titre du travail');  formData.append('category', 1)
+    /**
+     * AJOUTE LE TAVAIL AVEC APPEND
+     */
+    formData.append('image', file);
+    formData.append('title',work.title);
+    formData.append('category', categoryId)
     fetch('http://localhost:5678/api/works', {
         method: 'POST',
         headers: {
-           
-            "Authorization": `Bearer token`,
+
+            "Authorization": "Bearer" + token,
 
         },
         body: formData,
