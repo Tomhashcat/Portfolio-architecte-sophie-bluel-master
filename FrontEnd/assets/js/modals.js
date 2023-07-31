@@ -517,33 +517,46 @@ function deleteWork(workId) {
  * AJOUTE A LA BASE DE DONNEE
  * @param {work} file 
  */
-function ajouterTravailALaBaseDeDonnees(file) {
-    const formData = new FormData(); // Créez un nouvel objet FormData
-    /**
-     * AJOUTE LE TAVAIL AVEC APPEND
-     */
-    formData.append('image', file);
-    formData.append('title',work.title);
-    formData.append('category', categoryId)
-    fetch('http://localhost:5678/api/works', {
-        method: 'POST',
-        headers: {
+function ajouterTravailALaBaseDeDonnees(file, workTitle, categoryId) {
+    const reader = new FileReader();
 
-            "Authorization": "Bearer" + token,
+    reader.onloadend = function () {
+        const imageBase64 = reader.result.split(',')[1];
 
-        },
-        body: formData,
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Travail ajouté avec succès:', data);
-            // Vous pouvez également effectuer des actions supplémentaires après avoir ajouté le travail
+        const formData = new FormData(); // Créez un nouvel objet FormData
+        /**
+         * AJOUTE LE TAVAIL AVEC APPEND
+         */
+        formData.append('image', imageBase64);
+        formData.append('title', workTitle);
+        formData.append('categoryId', categoryId);
+        fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+
+                "Authorization": "Bearer " + token,
+
+            },
+            body: formData,
         })
-        .catch(error => {
-            console.error('Une erreur s\'est produite lors de l\'ajout du travail:', error);
-            // Gérez les erreurs ici, affichez des messages d'erreur, etc.
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Travail ajouté avec succès:', data);
+
+            })
+            .catch(error => {
+                console.error('Une erreur s\'est produite lors de l\'ajout du travail:', error);
+
+            });
+    };
+    reader.readAsDataURL(file);
 }
+
+
+
+
+
+
 
 
 
