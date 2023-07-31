@@ -453,7 +453,17 @@ li:hover {
 	margin-top: 12px;
 
 }
-
+.pAddPhoto{
+	position: absolute;
+	margin-top:22%
+}
+.fa-arrow-left{
+	position: absolute;
+	margin-top:4%;
+	margin-right: 85%;
+	font-size: 15px;
+	cursor: pointer;
+}
 .mod-gallery figure figcaption {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -557,6 +567,15 @@ li:hover {
 .grise-bar {
 	position: absolute;
 	margin-top: 78%;
+	margin-bottom: 23px;
+	display: flex;
+	width: 420px;
+	background-color: #B3B3B3;
+	border: 1px solid gray;
+}
+.grise-bar-second{
+	position: absolute;
+	margin-top: 88%;
 	margin-bottom: 23px;
 	display: flex;
 	width: 420px;

@@ -38,7 +38,7 @@ var btnsContainer;
 var option;
 var existingImagePreview;
 var modalCloseLink;
-
+var backArrow;
 
 /**
  * CHANGE LA MODAL SOUS CONDITION
@@ -243,6 +243,13 @@ function generateSecondModal() {
     /**
      * GENERE LE HTML DE LA SECONDE MODAL
      */
+    backArrow=document.createElement('i');
+    backArrow.className="fa-solid fa-arrow-left";
+    secondModalDiv.appendChild(backArrow);
+    backArrow.addEventListener('click', () => {
+        toggleModal();
+      });
+
     modalClose = document.createElement('a');
     modalClose.className = "modal_close";
     modalClose.textContent = "x";
@@ -279,6 +286,7 @@ function generateSecondModal() {
     inputPhoto.accept = 'image/*';
     inputPhoto.id = 'fileInput';
 
+
     labelPhoto = document.createElement('label');
     labelPhoto.htmlFor = 'fileInput';
     labelPhoto.id = 'customFileInput';
@@ -286,6 +294,15 @@ function generateSecondModal() {
     labelPhoto.textContent = '+ Ajouter une photo';
 
     uploadPhotoContainer.appendChild(labelPhoto);
+
+    pAddPhoto=document.createElement('p');
+    pAddPhoto.className='pAddPhoto';
+    pAddPhoto.textContent='jpg, pnj : 4mo max.'
+    uploadPhotoContainer.appendChild(pAddPhoto);
+
+    griseBar = document.createElement('div');
+    griseBar.className = 'grise-bar-second';
+    secondModalDiv.appendChild(griseBar);
 
     btnValider = document.createElement('div');
     btnValider.className = "btn-valider";
@@ -468,17 +485,18 @@ function handleDeleteButtonClick() {
  * @param {OBJ} workId 
  */
 function deleteWork(workId) {
+  
   const headers = {
-        "accept": "*/*",
+        
         "Authorization": "Bearer " + token,
-        "User-Id": userId
+       
     }
     fetch(`http://localhost:5678/api/works/${workId}`,
         {
             method: 'DELETE',
             headers: headers
         })
-        .then(response => response.json())
+       
         .then(data => {
             console.log('Œuvre supprimée avec succès:', data);
             generateFirstModal();
@@ -486,6 +504,7 @@ function deleteWork(workId) {
         .catch(error => {
             console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
         });
+        
 }
 
   
@@ -504,8 +523,8 @@ function ajouterTravailALaBaseDeDonnees(file) {
     fetch('http://localhost:5678/api/works', {
         method: 'POST',
         headers: {
-            "accept": "*/*",
-            "Authorization": "Bearer " + token,
+           
+            "Authorization": `Bearer token`,
 
         },
         body: formData,

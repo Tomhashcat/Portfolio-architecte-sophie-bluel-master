@@ -63,12 +63,12 @@ async function filterWorksByCat(categoryId) {
     figcaption = document.createElement("figcaption");
     figcaption.textContent = work.title;
     figure.appendChild(figcaption);
- galleryContainer.appendChild(figure);
+    galleryContainer.appendChild(figure);
   }
 }
 
 
-   
+
 
 
 // Vérifie si  connecté 
@@ -79,7 +79,7 @@ btnModifier = document.querySelector('.modifier');
 modeEdition = document.querySelector('.edition-mode')
 /**
  * SI CONNECT2 GENERE DE NEWS HTML
- *  */ 
+ *  */
 if (userId && token) {
 
   console.log('Utilisateur connecté');
