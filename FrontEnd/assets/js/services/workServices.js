@@ -15,10 +15,10 @@ async function deleteWork(workId) {
         {
             method: 'DELETE',
             headers: {
+              
+                "Authorization": `Bearer ` + token,
 
-                "Authorization": `Bearer  ${token}`,
-
-            }
+            }  
         })
         .then(response => response.json())
         .then(data => {
