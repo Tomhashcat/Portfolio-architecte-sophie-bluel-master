@@ -9,8 +9,8 @@ let modalClose;
 let firstModalDiv;
 let secondModalDiv;
 let uploadPhotoContainer;
-
-
+let selectedWorkId;
+let id;
 /**
  * GENERATE THE FIRST MODAL 
  */
@@ -73,9 +73,11 @@ function generateFirstModal() {
     deleteWorkBtn.setAttribute("href", "#");
     deleteWorkBtn.className = ('btn-delete-work');
     deleteWorkBtn.textContent = 'Supprimer les travaux';
+   
     btnsContainer.appendChild(deleteWorkBtn);
+    deleteWorkBtn.addEventListener('click',()=>{deleteWork()} );
 
-    deleteWorkBtn.addEventListener('click', handleDeleteButtonClick);
+
     //END OF THE FIRST MODAL GENERATION
 
     /**
@@ -98,7 +100,7 @@ function generateFirstModal() {
                 trashIcon = document.createElement('i');
                 trashIcon.className = 'fas fa-trash-can';
                 figure.appendChild(trashIcon);
-
+                trashIcon.addEventListener('click', handleDeleteButtonClick);
                 figcaption = document.createElement('figcaption');
                 figcaption.textContent = work.title;
                 figure.appendChild(figcaption);

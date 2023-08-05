@@ -10,12 +10,13 @@ var url = 'http://localhost:5678/api/works'; // API URL for works
  */
 async function deleteWork(workId) {
 
+
     await fetch(`${url}/${workId}`,
         {
             method: 'DELETE',
             headers: {
 
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer  ${token}`,
 
             }
         })
@@ -37,20 +38,13 @@ async function deleteWork(workId) {
  */
 function handleWorkClick(figureElement) {
 
-    const workId = figureElement.dataset.workid;
+    const id = figureElement.dataset.workid;
 
-    if (selectedWorkIds.includes(workId)) {
-
-        const index = selectedWorkIds.indexOf(workId);
-        if (index > -1) {
-            selectedWorkIds.splice(index, 1);
-        }
-        // Visual style to indicate that a work is deselected
+    if (selectedWorkId === id) {
+        selectedWorkId = null;
         figureElement.classList.remove('selected-work');
     } else {
-        // The workId is not yet selected, so add it to the list
-        selectedWorkIds.push(workId);
-        // Visual style to indicate that a work is selected
+        selectedWorkId = id;
         figureElement.classList.add('selected-work');
     }
 
@@ -59,19 +53,18 @@ function handleWorkClick(figureElement) {
  * HANDLE THE CLICK OF THE DELETE BUTTON IF ID
  */
 function handleDeleteButtonClick() {
-    if (selectedWorkIds.length > 0) {
 
-        selectedWorkIds.forEach(workId => {
-            deleteWork(workId);
-            console.log('workId', workId)
-        });
-        selectedWorkIds = [];
+    if (selectedWorkId !== null) {
+
+        deleteWork(selectedWorkId);
+       
 
     } else {
         console.log("Aucun travail sélectionné pour la suppression");
     }
 
 }
+
 
 
 

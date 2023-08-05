@@ -12,7 +12,9 @@ var password;
 var response;
 var jsonResponse;
 var userId;
-var token;
+var data;
+var token = localStorage.getItem('token');
+
 /**
  * RECUPERE LE FORMULAIRE
  */
@@ -60,7 +62,7 @@ async function handleLogin(event) {
       console.log('userId:', userId);
 
       localStorage.setItem('userId', userId);
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', jsonResponse.token);
       window.location.href = 'index.html';
 
 
