@@ -5,7 +5,7 @@ var url = 'http://localhost:5678/api/works'; // API URL for works
 
 
 /**
- * DELETE THE SELECTION UNDER CONDITIONS (MANAGED BY FETCH AND HANDLECLICK)
+ * DELETE THE SELECTION UNDER CONDITIONS
  * @param {OBJ} workId
  */
 async function deleteWork(workId) {
@@ -15,13 +15,13 @@ async function deleteWork(workId) {
         {
             method: 'DELETE',
             headers: {
-              
+
                 "Authorization": `Bearer ` + token,
 
-            }  
+            }
         })
-        .then(response =>{
-            if (!response.ok){
+        .then(response => {
+            if (!response.ok) {
                 throw new Error('La suppression de l\'œuvre a échoué');
             }
             return response.text();
@@ -31,10 +31,10 @@ async function deleteWork(workId) {
 
         })
         .catch(error => {
-            console.error('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
+            console.log('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
 
         });
-
+    generateFirstModal();
 }
 
 /**
@@ -49,8 +49,10 @@ function handleWorkClick(figureElement) {
         selectedWorkId = null;
         figureElement.classList.remove('selected-work');
     } else {
+
         selectedWorkId = id;
         figureElement.classList.add('selected-work');
+
     }
 
 }
@@ -62,59 +64,62 @@ function handleDeleteButtonClick() {
     if (selectedWorkId !== null) {
 
         deleteWork(selectedWorkId);
-       
+
 
     } else {
-        console.log("Aucun travail sélectionné pour la suppression");
+        alerte("Aucun travail sélectionné pour la suppression");
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
 /**
  * ADD TO THE DATABASE
  * @param {work} file
  */
-function ajouterTravailALaBaseDeDonnees(file, workTitle, categoryId) {
-    const reader = new FileReader();
-
-    reader.onloadend = function () {
+async function ajouterTravailALaBaseDeDonnees() {
 
 
-        const formData = new FormData(); // Créez un nouvel objet FormData
-        /**
-          * ADD THE WORK USING APPEND
-          */
-        formData.append('image', file);
-        formData.append('title', workTitle);
-        formData.append('categoryId', categoryId);
-        fetch('http://localhost:5678/api/works', {
-            method: 'POST',
-            headers: {
+    const title = document.querySelector(".input-new-title").value;
+    const categoryId = document.querySelector(".input-categories-new-work").value;
+    const image = document.querySelector(".input-File-Seconde-Modal").files[0];
 
-                "Authorization": "Bearer " + token,
 
-            },
-            body: formData,
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Travail ajouté avec succès:', data);
+    if (title === "" || categoryId === "" || image === undefined) {
+        alert("Merci de remplir tous les champs");
+        return;
+    } else if (categoryId !== "1" && categoryId !== "2" && categoryId !== "3") {
+        alert("Merci de choisir une catégorie valide");
+        return;
+    } else {
+        try {
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("category", categoryId);
+            formData.append("image", image);
 
-            })
-            .catch(error => {
-                console.error('Une erreur s\'est produite lors de l\'ajout du travail:', error);
-
+            const response = await fetch(`${url} `, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
             });
-    };
-    reader.readAsDataURL(file);
+
+            if (response.status === 201) {
+                alert("Projet ajouté avec succès :)");
+                generateFirstModal();
+
+            } else if (response.status === 400) {
+                alert("Merci de remplir tous les champs");
+            } else if (response.status === 500) {
+                alert("Erreur serveur");
+            } else if (response.status === 401) {
+                alert("Vous n'êtes pas autorisé à ajouter un projet");
+                window.location.href = "login.html";
+            }
+        }
+
+        catch (error) {
+            console.log(error);
+        }
+    }
 }

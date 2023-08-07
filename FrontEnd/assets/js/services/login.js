@@ -1,5 +1,5 @@
 /**
- * DECLARATION DES VARIABLES
+ * VARIABLES DECLARATIONs
  */
 var emailInput;
 var passwordInput;
@@ -16,13 +16,13 @@ var data;
 var token = localStorage.getItem('token');
 
 /**
- * RECUPERE LE FORMULAIRE
+ * GET THE LOGINFORM
  */
 var loginForm = document.querySelector(".loginForm");
 loginForm.addEventListener('submit', handleLogin);
 
 /**
- * RECUPERE LES ELEMENTS DU FORM ET ENVOIE EN BDD
+ * GET THE INFOS OF THE AND CHECK  IF EXIST
  * @param {obj} event 
  */
 async function handleLogin(event) {
@@ -49,7 +49,7 @@ async function handleLogin(event) {
     })
   });
 /**
- * SI PAS D ERREUR RENVOI UN TOKEN ET UN ID PUIS REDIRIGE VERS INDEX.html
+ *IF ALL GOOD GO BACK TO INDEX WITH EDITION MODE
  */
   if (response.ok) {
     jsonResponse = await response.json();
@@ -71,7 +71,7 @@ async function handleLogin(event) {
 
 
       /**
-       * GESTION DES ERREURS
+       * ERROR GESTION
        */
       messageError.textContent = "Erreur 404 ! Utilisateur ou mot de passe invalide";
       divError.style.display = 'flex';
@@ -87,7 +87,7 @@ async function handleLogin(event) {
     errorClose.addEventListener('click', function () {
       window.location.href = 'login.html';
     })
-    // Affiche la réponse complète de l'API pour déboguer
+    //SHOW RESPONSE FROM API FOR DEBUG
     const responseText = await response.text();
     console.log('Réponse de l\'API:', responseText);
   }

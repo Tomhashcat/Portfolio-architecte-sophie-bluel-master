@@ -16,7 +16,7 @@ let id;
  */
 function generateFirstModal() {
 
-
+    modal.innerHTML = "";
     if (document.querySelector('.First-modal')) {
 
         return;
@@ -73,9 +73,9 @@ function generateFirstModal() {
     deleteWorkBtn.setAttribute("href", "#");
     deleteWorkBtn.className = ('btn-delete-work');
     deleteWorkBtn.textContent = 'Supprimer les travaux';
-   
+
     btnsContainer.appendChild(deleteWorkBtn);
-    deleteWorkBtn.addEventListener('click',()=>{deleteWork()} );
+    deleteWorkBtn.addEventListener('click', () => { deleteWork(selectedWorkId,) });
 
 
     //END OF THE FIRST MODAL GENERATION
@@ -100,7 +100,8 @@ function generateFirstModal() {
                 trashIcon = document.createElement('i');
                 trashIcon.className = 'fas fa-trash-can';
                 figure.appendChild(trashIcon);
-                trashIcon.addEventListener('click', handleDeleteButtonClick);
+                trashIcon.addEventListener('click', () => { deleteWork(workId) });
+
                 figcaption = document.createElement('figcaption');
                 figcaption.textContent = work.title;
                 figure.appendChild(figcaption);
@@ -163,4 +164,3 @@ btnOpenFirstModal.addEventListener('click', () => {
     modal.style.display = "flex";
     generateFirstModal()
 });
-

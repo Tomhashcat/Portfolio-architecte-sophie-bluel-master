@@ -23,7 +23,7 @@ function generateSecondModal(modal) {
     let existingImagePreview;
     let modalCloseLink;
     let backArrow;
-
+    let form;
 
     /**
      * CHECK IF THE SECOND DIV EXIST
@@ -74,7 +74,12 @@ function generateSecondModal(modal) {
 
 
 
-    secondModalDiv.appendChild(uploadPhotoContainer);
+
+
+    form = document.createElement('form');
+    secondModalDiv.appendChild(form);
+    form.appendChild(uploadPhotoContainer);
+
 
     inputChoiceContent = document.createElement('div');
     inputChoiceContent.className = 'inputs-seconde-modal-choices';
@@ -150,10 +155,14 @@ function generateSecondModal(modal) {
     btnValider.addEventListener('click', (event) => {
         event.preventDefault();
         file = inputPhoto.files[0];// Get the selected file
-        if (file) {
-            ajouterTravailALaBaseDeDonnees(file);
+        let title = inputTitle.value;
+        let category = selectCategories.value;
+        if (file && title && category) {
+            ajouterTravailALaBaseDeDonnees(file, title, category);
             console.log("Nouveau travail ajouté !");
 
+        } else {
+            console.log("Veuillez remplir tous les champs !");
         }
     });
 
