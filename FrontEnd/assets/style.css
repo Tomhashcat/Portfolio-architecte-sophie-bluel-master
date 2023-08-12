@@ -99,7 +99,7 @@ details,
 figcaption,
 figure,
 footer,
-header,
+
 hgroup,
 menu,
 nav,
@@ -141,7 +141,11 @@ body {
 	font-family: 'Work Sans';
 	font-size: 14px;
 }
-
+ #headLog{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
 header {
 	display: flex;
 	flex-direction: column;
@@ -149,16 +153,18 @@ header {
 
 }
 
+
+
 .sophie {
 	display: flex;
-	flex-direction: crow;
+	flex-direction: row;
 	justify-content: space-between;
 	margin: 50px 0
 }
 
 .edition-mode {
 	width: 100%;
-	height: 100px;
+	height: 59px;
 	background-color: black;
 	display: flex;
 	justify-content: center;
@@ -287,19 +293,20 @@ li:hover {
 	cursor: pointer;
 	height: 37px;
 	cursor: pointer;
-	color: white;
+	color: #1D6154;
 	border: 1px solid #1D6154;
 	font-family: 'Syne';
-	background-color: #1D6154;
+	background-color: white;
 	border-radius: 25px;
 	padding-right: 30px;
 	padding-left: 30px;
-
-	&:hover {
-		background-color: white;
-		color: #1D6154;
-	}
 }
+
+.Filter.selected {
+	background-color: #1D6154;
+	color: white;
+}
+
 
 .gallery img {
 	width: 100%;
@@ -353,7 +360,7 @@ li:hover {
 
 	display: none;
 	margin-bottom: 50%;
-	
+
 	flex-wrap: wrap;
 	position: relative;
 	align-items: center;
@@ -373,7 +380,9 @@ li:hover {
 	display: flex;
 	font-size: 58px;
 }
-.First-modal{display: none;
+
+.First-modal {
+	display: none;
 	margin-bottom: 50%;
 	display: flex;
 	flex-wrap: wrap;
@@ -382,7 +391,9 @@ li:hover {
 	flex-direction: column;
 	background-color: white;
 	width: 630px;
-	height: 670px;}
+	height: 670px;
+}
+
 .modal {
 	display: none;
 	margin-bottom: 50%;
@@ -396,23 +407,24 @@ li:hover {
 	height: 670px;
 
 }
-.fas{
+
+.fas {
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 10px;
-	width:17px;
-	height:20px;
+	width: 17px;
+	height: 20px;
 	position: absolute;
 	margin-left: 40px;
 	margin-top: 3px;
-	color:white;
+	color: white;
 	background: black;
 }
 
-.selected-work{
-	border: 1px solid red;
+.selected-work {
+	border: 3px solid #1D6154;
 }
 
 
@@ -454,17 +466,20 @@ li:hover {
 	width: 58px;
 
 }
-.pAddPhoto{
+
+.pAddPhoto {
 	position: absolute;
-	margin-top:22%
+	margin-top: 22%
 }
-.fa-arrow-left{
+
+.fa-arrow-left {
 	position: absolute;
-	margin-top:4%;
+	margin-top: 4%;
 	margin-right: 85%;
 	font-size: 15px;
 	cursor: pointer;
 }
+
 .mod-gallery figure figcaption {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -472,7 +487,7 @@ li:hover {
 	width: 58px;
 }
 
-.btn-valider{
+.btn-valider {
 	position: absolute;
 	margin-top: 96%;
 	width: 200px;
@@ -484,27 +499,31 @@ li:hover {
 	align-items: center;
 	font-size: 24px;
 	border-radius: 20px;
-	cursor:not-allowed;
+	cursor: not-allowed;
 }
 
 .input-File-Seconde-Modal {
-	position: relative; /* Pour permettre le positionnement du label */
-  display: inline-block;
-}
-.custom-file-input{
+	position: relative;
+	/* Pour permettre le positionnement du label */
 	display: inline-block;
-  background-color: #bec3be;
-  position: absolute;
-  margin-top: 15%;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  border: none;
-  border-radius: 20px;
 }
+
+.custom-file-input {
+	display: inline-block;
+	background-color: #bec3be;
+	position: absolute;
+	margin-top: 15%;
+	color: white;
+	padding: 10px 20px;
+	cursor: pointer;
+	border: none;
+	border-radius: 20px;
+}
+
 #fileInput {
 	display: none;
-  }
+}
+
 .inputs-seconde-modal-choices {
 	display: flex;
 	flex-wrap: wrap;
@@ -529,9 +548,7 @@ li:hover {
 
 }
 
-.titre-input-titre {
-	
-}
+
 
 .input-new-title {
 	height: 51px;
@@ -540,20 +557,25 @@ li:hover {
 	box-shadow: 0px 4px 14px 0px #00000017;
 
 }
-.image-preview{
+
+.image-preview {
 	width: 420px;
-	height: 169px;position: absolute;
+	height: 169px;
+	position: absolute;
 	margin-bottom: 20%;
 }
+
 .btn-envoyer {
-	cursor:pointer;
+	cursor: pointer;
 	display: flex;
 	justify-content: center;
 }
-.btn-actif{
+
+.btn-actif {
 	cursor: pointer;
-	background-color: #1D6154 ;
+	background-color: #1D6154;
 }
+
 .btn-add-work {
 
 	margin-top: 10px;
@@ -576,7 +598,8 @@ li:hover {
 	background-color: #B3B3B3;
 	border: 1px solid gray;
 }
-.grise-bar-second{
+
+.grise-bar-second {
 	position: absolute;
 	margin-top: 90%;
 	margin-bottom: 23px;
@@ -617,7 +640,7 @@ li:hover {
 
 .btn-delete-work {
 	color: red;
-cursor: pointer;
+	cursor: pointer;
 	text-decoration: none;
 }
 
@@ -625,11 +648,13 @@ cursor: pointer;
 .error {
 	display: none;
 	flex-direction: column-reverse;
-	background: rgb(193, 191, 191, 0.80);
+	background: rgba(239, 238, 238, 0.8);
 	border-radius: 10px;
+	border: 3px solid #1D6154;
 
-	padding: 50px;
-	margin-top: 20px;
+	padding: 25px;
+	padding-top:0px;
+	margin-bottom: 20px;
 }
 
 .error-message {
@@ -642,12 +667,12 @@ cursor: pointer;
 }
 
 .error-close {
-
+	padding-top: 20px;
 	font-size: 20px;
 	text-decoration: none;
 	color: red;
 
-	margin-bottom: 20px;
+
 	text-align: right;
 
 
