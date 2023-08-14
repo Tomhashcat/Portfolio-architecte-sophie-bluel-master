@@ -260,13 +260,14 @@ function handleWorkClick(figureElement) {
 */
 function handleDeleteButtonClick() {
 
-  if (selectedWorkId !== null) {
+  if (selectedWorkId !== null ) {
 
-      deleteWork(selectedWorkId);
+    alerte("Aucun travail sélectionné pour la suppression");
+return;
 
-
-  } else {
-      alerte("Aucun travail sélectionné pour la suppression");
+  } if(confirmation)
+   {
+       deleteWork(selectedWorkId); 
   }
 
 }
@@ -280,11 +281,12 @@ function handleWorkClick(figureElement) {
 
   const id = figureElement.dataset.workid;
 
-  if (selectedWorkId === id) {
+  if (selectedWorkId === id ||selectedWorkIds.includes(id) ) {
+    selectedWorkIds = selectedWorkIds.filter(workId => workId !== id);
       selectedWorkId = null;
       figureElement.classList.remove('selected-work');
   } else {
-
+    selectedWorkIds.push(id);
       selectedWorkId = id;
       figureElement.classList.add('selected-work');
 

@@ -64,7 +64,7 @@ function generateFirstModal() {
         init();
         generateFirstModal()
 
-        // Redirect the user to "index.html"
+
 
     });
 
@@ -93,6 +93,33 @@ function generateFirstModal() {
     btnsContainer.appendChild(btnOpenSecondModal);
 
 
+    alerteDeleteSelection = document.createElement('div');
+    alerteDeleteSelection.className = 'alerteDeleteSelection';
+    alerteDeleteSelection.textContent = "Etes vous sur de vouloir supprimer la selection ?";
+    firstModalDiv.appendChild(alerteDeleteSelection);
+
+    btnYes = document.createElement('button');
+    btnYes.className = 'btnChoices';
+    btnYes.textContent = 'OUI';
+    alerteDeleteSelection.appendChild(btnYes);
+
+
+    btnYes.addEventListener('click', () => {
+        deleteWork(workId);
+
+    });
+
+
+
+    btnNo = document.createElement('button');
+    btnNo.className = 'btnChoices';
+    btnNo.textContent = 'NON';
+    alerteDeleteSelection.appendChild(btnNo);
+    btnNo.addEventListener('click', () => {
+        alerteDeleteSelection = document.querySelector('.alerteDeleteSelection');
+        alerteDeleteSelection.style.display = 'none';
+    });
+
 
     deleteWorkBtn = document.createElement('a');
     deleteWorkBtn.setAttribute("href", "#");
@@ -100,7 +127,13 @@ function generateFirstModal() {
     deleteWorkBtn.textContent = 'Supprimer les travaux';
 
     btnsContainer.appendChild(deleteWorkBtn);
-    deleteWorkBtn.addEventListener('click', () => { deleteWork(selectedWorkId,) });
+    deleteWorkBtn.addEventListener('click',
+
+        () => {
+            alerteDeleteSelection = document.querySelector('.alerteDeleteSelection');
+            alerteDeleteSelection.style.display = 'flex';
+        });
+
 
 
     //END OF THE FIRST MODAL GENERATION
@@ -131,6 +164,7 @@ function generateFirstModal() {
                     const figureElement = event.currentTarget.parentElement;
                     const workId = figureElement.dataset.workid;
                     deleteWork(workId)
+
                 });
 
                 figcaption = document.createElement('figcaption');

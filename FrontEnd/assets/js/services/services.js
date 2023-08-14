@@ -15,25 +15,25 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var url = 'http://localhost:5678/api/';
 
-async function getCategory(){
-    const request = await fetch(url + "categories",{
-        method : "GET",
-        headers : {
-            "Accept" : "application/json",
+async function getCategory() {
+    const request = await fetch(url + "categories", {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
             'Content-Type': 'application/json',
         }
     })
-    if(!request.ok){
+    if (!request.ok) {
         throw new Error("erreur API");
     }
     const result = await request.json();
-    return result;                     
+    return result;
 };
 
 var url = 'http://localhost:5678/api/works'; // API URL for works
@@ -76,7 +76,10 @@ async function deleteWork(workId) {
 
 
 }
-
+function AlertInput() {
+    msgAlerteInput;
+    msgAlerteInput.style.display = 'flex';
+}
 /**
  * ADD TO THE DATABASE
  * @param {work} file
@@ -90,16 +93,28 @@ async function ajouterTravailALaBaseDeDonnees() {
 
 
     if (title === "" || categoryId === "" || image === undefined) {
-        alert("Merci de remplir tous les champs");
+
+
+
+        AlertInput();
+        console.log("Merci de remplir tous les champs");
+
         return;
     } else if (categoryId !== "1" && categoryId !== "2" && categoryId !== "3") {
         alert("Merci de choisir une catégorie valide");
+
         return;
     } else {
         const allowedExtensions = ["jpg", "png"];
         const fileExtension = image.name.split('.').pop().toLowerCase();
         if (!allowedExtensions.includes(fileExtension)) {
-            alert("L'extension du fichier doit être JPG ou PNG");
+
+            function alertPhoto() {
+                alertInputPhoto;
+                alertInputPhoto.style.display = 'flex';
+            }
+            alertPhoto();
+            console.log("Merci de remplir tous les champs");
             return;
         }
         try {
@@ -121,11 +136,11 @@ async function ajouterTravailALaBaseDeDonnees() {
             });
 
             if (response.status === 201) {
-                alert("Projet ajouté avec succès :)");
+
                 init(categoryId);
                 generateFirstModal();
-              
-                
+
+
 
             } else if (response.status === 400) {
                 alert("Merci de remplir tous les champs");

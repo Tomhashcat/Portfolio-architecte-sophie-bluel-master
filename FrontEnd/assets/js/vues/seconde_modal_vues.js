@@ -25,12 +25,15 @@
  * GENERATE THE SECOND MODAL
  * @param {Object} modal - The modal object
  */
+let msgAlerteInput;
+let alertInputPhoto;
+let bienJoueDiv;
 
 function generateSecondModal(modal) {
 
 
 
-    let file;
+  
     let inputPhoto;
     let inputChoiceContent;
     let labelPhoto;
@@ -48,17 +51,18 @@ function generateSecondModal(modal) {
     let backArrow;
     let form;
 
+
     /**
      * CHECK IF THE SECOND DIV EXIST
      */
-    
-        secondModalDiv = document.createElement('div');
-        secondModalDiv.className = "seconde-modal";
-        secondModalDiv.style.display = 'flex';
-        secondModalDiv.innerHTML="";
-        modal.appendChild(secondModalDiv);
-        
-    
+
+    secondModalDiv = document.createElement('div');
+    secondModalDiv.className = "seconde-modal";
+    secondModalDiv.style.display = 'flex';
+    secondModalDiv.innerHTML = "";
+    modal.appendChild(secondModalDiv);
+
+
     if (firstModalDiv) {
         firstModalDiv.style.display = 'none';
     }
@@ -81,19 +85,23 @@ function generateSecondModal(modal) {
     modalClose.textContent = "x";
     secondModalDiv.appendChild(modalClose);
     modalClose.addEventListener('click', () => {
-        // Close the modal by hiding the secondModalDiv
-        secondModalDiv.style.display = 'none';
-        // Make sure to reset the selectedWorkIds
-        selectedWorkIds = [];
-
-        // Redirect the user to "index.html"
-        window.location.href = "index.html";
+        // Close the modal by hiding the firstModalDiv
+        mod.style.display = 'none';
+        /**
+           * INITIANLIZE THE PAGE
+           */
+        init();
+        generateFirstModal()
     });
     secondeModalTitre = document.createElement('h3');
     secondeModalTitre.className = 'modal_Tiltle';
     secondeModalTitre.textContent = "Ajouter une photo";
     secondModalDiv.appendChild(secondeModalTitre);
 
+    msgAlerteInput = document.createElement('div');
+    msgAlerteInput.className = 'alertInput';
+    msgAlerteInput.textContent = "!! Veuillez remplir tous les champs !!";
+    secondModalDiv.appendChild(msgAlerteInput);
 
     uploadPhotoContainer = document.createElement('div');
     uploadPhotoContainer.className = "upload-photo-container";
@@ -116,6 +124,11 @@ function generateSecondModal(modal) {
     inputPhoto.type = 'file';
     inputPhoto.accept = 'image/*';
     inputPhoto.id = 'fileInput';
+
+    alertInputPhoto = document.createElement('div');
+    alertInputPhoto.className = ('alertInputPhoto');
+    alertInputPhoto.textContent = ("Format de fichier innatendu :(");
+    secondModalDiv.appendChild(alertInputPhoto);
 
 
     labelPhoto = document.createElement('label');
@@ -166,6 +179,7 @@ function generateSecondModal(modal) {
 
     btnModal.addEventListener('click', toggleModal);
 
+   
 
     /**
     * ADD ELEMENTS TO THE DOM
@@ -178,22 +192,21 @@ function generateSecondModal(modal) {
     inputChoiceContent.appendChild(selectCategories);
 
 
+
     btnValider.addEventListener('click', (event) => {
         event.preventDefault();
-        file = inputPhoto.files[0];// Get the selected file
-        let title = inputTitle.value;
-        let category = selectCategories.value;
-        if (file && title && category) {
-            ajouterTravailALaBaseDeDonnees(file, title, category);
-            console.log("Nouveau travail ajouté !");
+       
 
-        } else {
-            console.log("Veuillez remplir tous les champs !");
-        }
+
+        ajouterTravailALaBaseDeDonnees();
+        console.log("Nouveau travail ajouté !");
+
     });
 
 
-
+   
+ 
+    
 
 
     /**
