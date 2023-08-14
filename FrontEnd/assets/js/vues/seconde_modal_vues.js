@@ -127,7 +127,7 @@ function generateSecondModal(modal) {
 
     alertInputPhoto = document.createElement('div');
     alertInputPhoto.className = ('alertInputPhoto');
-    alertInputPhoto.textContent = ("Format de fichier innatendu :(");
+    alertInputPhoto.textContent = ("Format de fichier inattendu :(");
     secondModalDiv.appendChild(alertInputPhoto);
 
 
