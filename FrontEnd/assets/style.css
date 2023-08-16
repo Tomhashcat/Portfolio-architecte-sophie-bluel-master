@@ -310,7 +310,8 @@ li:hover {
 
 
 .gallery img {
-	width: 100%;
+	width: 305px;
+	height: 407px;
 	cursor: pointer;
 
 }
@@ -361,7 +362,8 @@ li:hover {
 	position: absolute;
 	color:red;
 	
-	background-color: rgb(246, 241, 241);
+	background-color: rgb(247, 247, 247);
+	border: 2px solid  #1D6154;
 	width:400px;
 	height:80px;
 	margin-top:40%;
@@ -376,8 +378,9 @@ li:hover {
 
 .btnChoices{
 	width: 150px;
+	height:25px;
 	cursor: pointer;
-	border-radius: 10px;
+	border-radius: 25px;
 	background-color: white;
 	border: 1px solid #1D6154;
 }
@@ -407,7 +410,8 @@ li:hover {
 }
 .bienJoueDiv{
 	display:none;
-	color: green;
+	color:  #1D6154;
+	;
 }
 .fa-images {
 
@@ -451,17 +455,32 @@ li:hover {
 	width: 17px;
 	height: 20px;
 	position: absolute;
-	margin-left: 40px;
+	margin-left: 55px;
 	margin-top: 3px;
 	color: white;
 	background: black;
 }
 
 .selected-work {
+	
 	border: 3px solid #1D6154;
+	
 }
+.noSelectionDiv{
+	display:none;
+}
+.noWorksMessage{
+	display: flex;
+	justify-content: center;
+	color: White;
 
-
+	margin-left: 57%;
+	align-items: center;
+	font-size: 35px;
+	width:543px;
+	height:543px;
+	background-color:#1D6154
+}
 .modal_close {
 	font-size: 24px;
 	text-decoration: none;
@@ -489,7 +508,8 @@ li:hover {
 
 	display: flex;
 	margin: 0%;
-	width: 58px;
+	width: 76.61px;
+	height: 102.57px;
 }
 
 .mod-gallery figure {
@@ -497,7 +517,7 @@ li:hover {
 	flex-wrap: wrap;
 	flex-direction: column;
 	margin-top: 12px;
-	width: 58px;
+	width: 76px;
 
 }
 

@@ -1,28 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                                             //////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                                             //////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                                             //////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                SOMMAIRE                     //////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                                             //////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                                             //////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//  --Line 55  : FILTERBYCAT (Filters categories and creates buttons)                                                        ///////////////////////
-//  --Line 100 : Check if connected (not a function)                                                                         ///////////////////////
-//  --Line 132 : Declarations of Filters arrays                                                                              ///////////////////////
-//  --Line 139 : DISPLAYCAT (Distributes WORKS based on their data-id (categories' id) and creates buttons)   n              ///////////////////////                                                                                                                                               
-//  --Line 207 : Logout                                                                                                       //////////////////////
-//  --Line 220 : INIT (Calls displayByCat based on detected categoryId)                                                        /////////////////////                                        
-//  --Line 232 : Call displayCat to update the gallery                                                                         /////////////////////
-//  --Line 238 : handleWorkClick (listens if workId is selected, if yes, applies the class_selected)                           /////////////////////
-//  --Line 292 : handleWorkClickToDelete (calls deleteWork from services.js)                                                   /////////////////////
-//  --Line 308 : ToggleModal (toggles modals)                                                                                 //////////////////////    
- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 let response;
 let works;
 let work;
@@ -33,9 +8,9 @@ let modeEdition;
 let categoryId;
 let currentCategoryId;
 
-/**
- * GET BTNS
- */
+
+//  GET BTNS
+
 let filtersContainer = document.querySelector('.Filters');
 let btnModal = document.querySelector('.modifier');
 let loginButton = document.querySelector('.div-login');
@@ -59,11 +34,19 @@ async function filterWorksByCat(categoryId) {
 
   if (categoryId !== 0) {
     filteredWorks = works.filter(work => work.categoryId === categoryId);
-  }
+
+  };
 
   let galleryContainer = document.querySelector(".gallery");
   galleryContainer.innerHTML = '';
 
+  if (filteredWorks.length === 0) {
+    // Si la galerie est vide, afficher un message
+    let noWorksMessage = document.createElement("p");
+    noWorksMessage.textContent = "Aucune œuvre trouvée.";
+    noWorksMessage.className='noWorksMessage'
+    galleryContainer.appendChild(noWorksMessage);
+  }else{ 
   for (let index = 0; index < filteredWorks.length; index++) {
     work = filteredWorks[index];
 
@@ -80,19 +63,19 @@ async function filterWorksByCat(categoryId) {
     galleryContainer.appendChild(figure);
   }
 }
-
-function updateSelectedButton(button) {
-  if (selectedButton !== null) {
-    selectedButton.classList.remove("selected");
-  }
-  selectedButton = button;
-  selectedButton.classList.add("selected");
 }
 
+function updateSelectedButton(button) {
+ 
+  if (selectedButton !== null) {
+   
+    selectedButton.classList.remove("selected");
 
+  }
+  selectedButton = button;
 
-
-
+  selectedButton.classList.add("selected");
+}
 
 
 
@@ -137,6 +120,7 @@ if (userId && token) {
 let filters = [];
 let buttonsFiltres = [];
 let selectedButton = null;
+
 /**
  * ATTRIBUT UN BUTTON POUR CHAQUE CAT
  */
@@ -151,15 +135,19 @@ async function displayCategories() {
     filters.push({ text: 'Tous', className: 'Filter Filter-All', dataid: '0' });
     let buttonTous = document.createElement('button');
     buttonTous.textContent = 'Tous';
-    buttonTous.className = 'Filter Filter-All';
+    buttonTous.className = 'Filter Filter-All selected ';
+
     buttonTous.setAttribute('data-id', '0');
     filtersContainer.appendChild(buttonTous);
     buttonsFiltres.push(buttonTous);
+
+
 
     //événement click pour le bouton "Tous"
     buttonTous.addEventListener('click', () => {
       filterWorksByCat(0);
       updateSelectedButton(buttonTous);
+
     });
 
 
@@ -194,8 +182,9 @@ async function displayCategories() {
 
       button.addEventListener('click', async () => {
         categoryId = parseInt(button.getAttribute('data-id'));
-
+        buttonTous.classList.remove('selected');
         filterWorksByCat(categoryId);
+
         updateSelectedButton(button);
 
       });
@@ -207,7 +196,11 @@ async function displayCategories() {
   } catch (error) {
     console.error("Une erreur s'est produite lors de la récupération des catégories :", error);
   }
+  filterWorksByCat(0);
 }
+
+
+
 /**
  * LOGOUT
  */
@@ -226,8 +219,9 @@ async function init() {
 
   if (selectedButton !== null) {
     currentCategoryId = parseInt(selectedButton.getAttribute('data-id'));
+
   } else {
-    currentCategoryId = 0; 
+    currentCategoryId = 0;
   }
   await filterWorksByCat(currentCategoryId);
 }
@@ -244,29 +238,29 @@ function handleWorkClick(figureElement) {
   const id = figureElement.dataset.workid;
 
   if (selectedWorkId === id) {
-      selectedWorkId = null;
-      figureElement.classList.remove('selected-work');
+    selectedWorkId = null;
+    figureElement.classList.remove('selected-work');
   } else {
 
-      selectedWorkId = id;
-      figureElement.classList.add('selected-work');
+    selectedWorkId = id;
+    figureElement.classList.add('selected-work');
 
   }
 
 }
+
 /**
 * HANDLE THE CLICK OF THE DELETE BUTTON IF ID
 */
 function handleDeleteButtonClick() {
 
-  if (selectedWorkId !== null ) {
+  if (selectedWorkId !== null) {
 
     alerte("Aucun travail sélectionné pour la suppression");
-return;
+    return;
 
-  } if(confirmation)
-   {
-       deleteWork(selectedWorkId); 
+  } if (confirmation) {
+    deleteWork(selectedWorkId);
   }
 
 }
@@ -280,14 +274,14 @@ function handleWorkClick(figureElement) {
 
   const id = figureElement.dataset.workid;
 
-  if (selectedWorkId === id ||selectedWorkIds.includes(id) ) {
+  if (selectedWorkId === id || selectedWorkIds.includes(id)) {
     selectedWorkIds = selectedWorkIds.filter(workId => workId !== id);
-      selectedWorkId = null;
-      figureElement.classList.remove('selected-work');
+    selectedWorkId = null;
+    figureElement.classList.remove('selected-work');
   } else {
     selectedWorkIds.push(id);
-      selectedWorkId = id;
-      figureElement.classList.add('selected-work');
+    selectedWorkId = id;
+    figureElement.classList.add('selected-work');
 
   }
 
@@ -299,11 +293,11 @@ function handleDeleteButtonClick() {
 
   if (selectedWorkId !== null) {
 
-      deleteWork(selectedWorkId);
-
+    deleteWork(selectedWorkId);
+    return;
 
   } else {
-      alerte("Aucun travail sélectionné pour la suppression");
+    alerte("Aucun travail sélectionné pour la suppression");
   }
 
 }
@@ -317,18 +311,18 @@ function toggleModal() {
 
 
   if (isFirstModalOpen) {
-    
-      secondModalDiv.style.display = 'none';
-      firstModalDiv.style.display = 'flex';
-      generateFirstModal();
+
+    secondModalDiv.style.display = 'none';
+    firstModalDiv.style.display = 'flex';
+    generateFirstModal();
   } else {
-      mod.style.display = "flex";
-      modal.style.display = "flex";
-      firstModalDiv.style.display = 'none';
-      secondModalDiv.style.display = 'flex';
-      if (!secondModalDiv) {
-          generateSecondModal();
-      }
+    mod.style.display = "flex";
+    modal.style.display = "flex";
+    firstModalDiv.style.display = 'none';
+    secondModalDiv.style.display = 'flex';
+    if (!secondModalDiv) {
+      generateSecondModal();
+    }
 
   }
   isFirstModalOpen = !isFirstModalOpen;

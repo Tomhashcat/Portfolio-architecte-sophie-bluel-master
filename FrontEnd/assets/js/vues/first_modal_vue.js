@@ -1,26 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                                             //////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                                             //////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                                             //////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                SOMMAIRE                     //////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                                             //////////////////////////////////////////////////////////////////////////// 
-///////////////////////////                                             //////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-///  --Line 41  :generateFirstModal                                                                                           //////////////////////
-///  --Line 112 : Fetch to create gallery elements                                                                            //////////////////////
-///  --Line 153 : SET AN ID TO ALL WORKS IN THE MODAL GALLERY                                                                 //////////////////////
-///  --Line 177 : Check the button to delete already exist                                                                    //////////////////////                                                                                                                                             
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * DECLARATION OF VARIABLES
  */
@@ -33,7 +10,10 @@ let firstModalDiv;
 let secondModalDiv;
 let uploadPhotoContainer;
 let selectedWorkId;
+let noSelectionDiv;
 let id;
+let btnYes;
+let btnNo;
 /**
  * GENERATE THE FIRST MODAL 
  */
@@ -93,32 +73,66 @@ function generateFirstModal() {
     btnsContainer.appendChild(btnOpenSecondModal);
 
 
+
+
     alerteDeleteSelection = document.createElement('div');
     alerteDeleteSelection.className = 'alerteDeleteSelection';
-    alerteDeleteSelection.textContent = "Etes vous sur de vouloir supprimer la selection ?";
+
+
+    if (selectedWorkIds.length === 0) {
+
+        alerteDeleteSelection.textContent = "Rien n'est sélectionné pour la suppression.";
+        btnOk = document.createElement('button');
+        btnOk.className = 'btnChoices';
+        btnOk.textContent = 'OK';
+        alerteDeleteSelection.appendChild(btnOk);
+        btnOk.addEventListener('click', () => {
+            alerteDeleteSelection.style.display = 'none';
+        });
+        if (btnYes) {
+            btnYes.style.display = 'none';
+        }
+        if (btnNo) {
+            btnNo.style.display = 'none';
+        }
+    } else {
+        alerteDeleteSelection.textContent = "Etes vous sur de vouloir supprimer la sélection ?";
+        if (btnYes) {
+            btnYes.style.display = 'block';
+        } else {
+            btnYes = document.createElement('button');
+            btnYes.className = 'btnChoices';
+            btnYes.textContent = 'OUI';
+            alerteDeleteSelection.appendChild(btnYes);
+        }
+        if (btnNo) {
+            btnNo.style.display = 'block';
+        } else {
+            btnNo = document.createElement('button');
+            btnNo.className = 'btnChoices';
+            btnNo.textContent = 'NON';
+            alerteDeleteSelection.appendChild(btnNo);
+        }
+
+
+
+
+        btnYes.addEventListener('click', () => {
+            deleteWork(workId);
+
+        });
+
+
+        btnNo.addEventListener('click', () => {
+
+            alerteDeleteSelection.style.display = 'none';
+        });
+
+
+    }
+
     firstModalDiv.appendChild(alerteDeleteSelection);
 
-    btnYes = document.createElement('button');
-    btnYes.className = 'btnChoices';
-    btnYes.textContent = 'OUI';
-    alerteDeleteSelection.appendChild(btnYes);
-
-
-    btnYes.addEventListener('click', () => {
-        deleteWork(workId);
-
-    });
-
-
-
-    btnNo = document.createElement('button');
-    btnNo.className = 'btnChoices';
-    btnNo.textContent = 'NON';
-    alerteDeleteSelection.appendChild(btnNo);
-    btnNo.addEventListener('click', () => {
-        alerteDeleteSelection = document.querySelector('.alerteDeleteSelection');
-        alerteDeleteSelection.style.display = 'none';
-    });
 
 
     deleteWorkBtn = document.createElement('a');
@@ -127,12 +141,19 @@ function generateFirstModal() {
     deleteWorkBtn.textContent = 'Supprimer les travaux';
 
     btnsContainer.appendChild(deleteWorkBtn);
-    deleteWorkBtn.addEventListener('click',
-
-        () => {
+    deleteWorkBtn.addEventListener('click', () => {
+        if (selectedWorkId === null) {
+            noSelectionDiv = document.querySelector('.noSelectionDiv')
+            noSelectionDiv.style.display = 'flex';
+            alerteDeleteSelection = document.querySelector('.alerteDeleteSelection');
+            alerteDeleteSelection.style.display = 'none';
+        }
+        else {
             alerteDeleteSelection = document.querySelector('.alerteDeleteSelection');
             alerteDeleteSelection.style.display = 'flex';
-        });
+        }
+
+    });
 
 
 
