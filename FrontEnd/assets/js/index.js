@@ -50,8 +50,7 @@ filterWorksByCat(0);
 
 /**
  * 
- * GET CATEGORYS
- * @parma {function} works
+ * @param {number} categoryId 
  */
 async function filterWorksByCat(categoryId) {
   response = await fetch("http://localhost:5678/api/works");
@@ -100,7 +99,7 @@ function updateSelectedButton(button) {
 
 /**
  * CHECK IF LOGIN 
- * @param{obj}
+ * @param {obj}
  */
 userId = localStorage.getItem('userId');
 token = localStorage.getItem('token');
