@@ -89,30 +89,24 @@ function generateFirstModal() {
         btnOk.addEventListener('click', () => {
             alerteDeleteSelection.style.display = 'none';
         });
-        if (btnYes) {
-            btnYes.style.display = 'none';
-        }
-        if (btnNo) {
-            btnNo.style.display = 'none';
-        }
-    } else {
+    }
+
+
+    else {
         alerteDeleteSelection.textContent = "Etes vous sur de vouloir supprimer la sélection ?";
-        if (btnYes) {
-            btnYes.style.display = 'block';
-        } else {
-            btnYes = document.createElement('button');
-            btnYes.className = 'btnChoices';
-            btnYes.textContent = 'OUI';
-            alerteDeleteSelection.appendChild(btnYes);
-        }
-        if (btnNo) {
-            btnNo.style.display = 'block';
-        } else {
-            btnNo = document.createElement('button');
-            btnNo.className = 'btnChoices';
-            btnNo.textContent = 'NON';
-            alerteDeleteSelection.appendChild(btnNo);
-        }
+
+        btnYes = document.createElement('button');
+        btnYes.className = 'btnChoices';
+        btnYes.textContent = 'OUI';
+        alerteDeleteSelection.appendChild(btnYes);
+
+
+
+        btnNo = document.createElement('button');
+        btnNo.className = 'btnChoices';
+        btnNo.textContent = 'NON';
+        alerteDeleteSelection.appendChild(btnNo);
+
 
 
 

@@ -52,9 +52,9 @@ async function handleLogin(event) {
       'password': password
     })
   });
-/**
- *IF ALL GOOD GO BACK TO INDEX WITH EDITION MODE
- */
+  /**
+   *IF ALL GOOD GO BACK TO INDEX WITH EDITION MODE
+   */
   if (response.ok) {
     jsonResponse = await response.json();
     console.log(jsonResponse);

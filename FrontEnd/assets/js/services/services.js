@@ -51,15 +51,16 @@ async function deleteWork(workId) {
             console.log('Une erreur s\'est produite lors de la suppression de l\'œuvre:', error);
 
         });
-
-
-
-
 }
+
+
+
+
 function AlertInput() {
     msgAlerteInput;
     msgAlerteInput.style.display = 'flex';
 }
+
 /**
  * ADD TO THE DATABASE
  * @param {work} file

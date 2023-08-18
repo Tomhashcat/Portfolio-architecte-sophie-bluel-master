@@ -44,31 +44,31 @@ async function filterWorksByCat(categoryId) {
     // Si la galerie est vide, afficher un message
     let noWorksMessage = document.createElement("p");
     noWorksMessage.textContent = "Aucune œuvre trouvée.";
-    noWorksMessage.className='noWorksMessage'
+    noWorksMessage.className = 'noWorksMessage'
     galleryContainer.appendChild(noWorksMessage);
-  }else{ 
-  for (let index = 0; index < filteredWorks.length; index++) {
-    work = filteredWorks[index];
+  } else {
+    for (let index = 0; index < filteredWorks.length; index++) {
+      work = filteredWorks[index];
 
-    let figure = document.createElement("figure");
-    let image = document.createElement("img");
+      let figure = document.createElement("figure");
+      let image = document.createElement("img");
 
-    image.src = work.imageUrl;
-    image.alt = work.title;
-    figure.appendChild(image);
+      image.src = work.imageUrl;
+      image.alt = work.title;
+      figure.appendChild(image);
 
-    let figcaption = document.createElement("figcaption");
-    figcaption.textContent = work.title;
-    figure.appendChild(figcaption);
-    galleryContainer.appendChild(figure);
+      let figcaption = document.createElement("figcaption");
+      figcaption.textContent = work.title;
+      figure.appendChild(figcaption);
+      galleryContainer.appendChild(figure);
+    }
   }
-}
 }
 
 function updateSelectedButton(button) {
- 
+
   if (selectedButton !== null) {
-   
+
     selectedButton.classList.remove("selected");
 
   }
