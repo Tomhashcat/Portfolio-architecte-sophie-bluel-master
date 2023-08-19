@@ -83,9 +83,11 @@ function generateSecondModal(modal) {
 
     uploadPhotoContainer = document.createElement('div');
     uploadPhotoContainer.className = "upload-photo-container";
+    
 
-
-
+    imgIcon = document.createElement('i');
+    imgIcon.className='fa-regular fa-image';
+uploadPhotoContainer.appendChild(imgIcon);
 
 
     form = document.createElement('form');

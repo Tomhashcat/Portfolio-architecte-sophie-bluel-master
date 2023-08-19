@@ -138,7 +138,7 @@ function generateFirstModal() {
     deleteWorkBtn.addEventListener('click', () => {
         if (selectedWorkId === null) {
             noSelectionDiv = document.querySelector('.noSelectionDiv')
-            noSelectionDiv.style.display = 'flex';
+            noSelectionDiv.style.display = 'block';
             alerteDeleteSelection = document.querySelector('.alerteDeleteSelection');
             alerteDeleteSelection.style.display = 'none';
         }

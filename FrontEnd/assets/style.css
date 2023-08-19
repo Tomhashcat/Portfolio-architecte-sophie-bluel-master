@@ -387,7 +387,11 @@ li:hover {
 	background-color: white;
 	border: 1px solid #1D6154;
 }
-
+.fa-image{
+font-size: 50px;
+margin-top: 20px;
+color:#B3B3B3;
+}
 .btnChoices:hover {
 	background-color: #1D6154;
 	border: 1px solid #1D6154;
@@ -423,8 +427,11 @@ li:hover {
 
 	display: flex;
 	font-size: 58px;
-}
 
+}
+.titre-input-titre{
+	margin-top:-15%
+}
 .First-modal {
 	display: none;
 	margin-bottom: 50%;
@@ -724,7 +731,7 @@ li:hover {
 .error {
 	display: none;
 	flex-direction: column-reverse;
-	background: rgba(239, 238, 238, 0.8);
+	background: white;
 	border-radius: 10px;
 	border: 3px solid #1D6154;
 

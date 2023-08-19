@@ -74,9 +74,7 @@ async function handleLogin(event) {
       console.log('Utilisateur non trouvé');
 
 
-      /**
-       * ERROR GESTION
-       */
+    //ERRORS GESTION
       messageError.textContent = "!!! Utilisateur ou mot de passe invalide !!!";
       divError.style.display = 'flex';
       errorClose.addEventListener('click', function () {
