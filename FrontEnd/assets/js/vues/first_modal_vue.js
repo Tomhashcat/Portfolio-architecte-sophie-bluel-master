@@ -73,7 +73,10 @@ function generateFirstModal() {
     btnsContainer.appendChild(btnOpenSecondModal);
 
 
-
+    noSelectionDiv = document.createElement('div');
+    noSelectionDiv.className = 'noSelectionDiv';
+    noSelectionDiv.textContent = "Aucune sélection n'est faite.";
+    firstModalDiv.appendChild(noSelectionDiv);
 
     alerteDeleteSelection = document.createElement('div');
     alerteDeleteSelection.className = 'alerteDeleteSelection';
@@ -136,11 +139,18 @@ function generateFirstModal() {
 
     btnsContainer.appendChild(deleteWorkBtn);
     deleteWorkBtn.addEventListener('click', () => {
-        if (selectedWorkId === null) {
-            noSelectionDiv = document.querySelector('.noSelectionDiv')
-            noSelectionDiv.style.display = 'block';
+        const selectedFigures = modGalleryContainer.querySelectorAll('.figure.selected');
+       
+    
+
+        if (selectedWorkIds.length === 0) {
+          
+           
+         
+
             alerteDeleteSelection = document.querySelector('.alerteDeleteSelection');
-            alerteDeleteSelection.style.display = 'none';
+            alerteDeleteSelection.style.display = 'flex';
+           
         }
         else {
             alerteDeleteSelection = document.querySelector('.alerteDeleteSelection');
@@ -188,7 +198,11 @@ function generateFirstModal() {
                 figure.setAttribute('data-workid', workId);
 
                 // Add click event to delete works
-                figure.addEventListener('click', () => handleWorkClick(figure));
+                figure.addEventListener('click', () => {
+                    handleWorkClick(figure);
+                    figure.classList.toggle('selected');
+                }
+                );
 
                 modGalleryContainer.appendChild(figure);
             });

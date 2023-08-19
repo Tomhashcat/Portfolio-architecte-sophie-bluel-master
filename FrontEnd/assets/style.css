@@ -511,9 +511,9 @@ color:#B3B3B3;
 
 	display: flex;
 	flex-wrap: wrap;
-	flex-direction: column;
-
-	width: 70%;
+	
+justify-content: space-between;
+	width: 67%;
 	height: 48%;
 	margin-top: 20px;
 
