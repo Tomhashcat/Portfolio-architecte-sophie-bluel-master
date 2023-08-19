@@ -27,6 +27,7 @@ loginForm.addEventListener('submit', handleLogin);
  */
 if (token) {
   console.log('Utilisateur déjà connecté');
+
   window.location.href = 'index.html'; // Rediriger vers la page d'accueil
 }
 async function handleLogin(event) {

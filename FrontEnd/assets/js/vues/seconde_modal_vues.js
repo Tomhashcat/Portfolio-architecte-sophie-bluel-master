@@ -104,6 +104,16 @@ uploadPhotoContainer.appendChild(imgIcon);
     inputPhoto.type = 'file';
     inputPhoto.accept = 'image/*';
     inputPhoto.id = 'fileInput';
+    inputPhoto.addEventListener('change',()=>{
+        const file = inputPhoto.files[0];
+        if(file){
+            btnValider.disabled = false;
+            btnValider.classList.add('btn-actif');
+            
+            
+            labelPhoto.style.display = 'none';
+        }
+    })
 
     alertInputPhoto = document.createElement('div');
     alertInputPhoto.className = ('alertInputPhoto');

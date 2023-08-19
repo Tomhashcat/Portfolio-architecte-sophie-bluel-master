@@ -72,7 +72,10 @@ async function ajouterTravailALaBaseDeDonnees() {
     const categoryId = document.querySelector(".input-categories-new-work").value;
     const image = document.querySelector(".input-File-Seconde-Modal").files[0];
 
-
+    if(image){
+        labelPhoto=document.querySelector('.image-')
+        labelPhoto.style.display='none';
+    }
     if (title === "" || categoryId === "" || image === undefined) {
 
 

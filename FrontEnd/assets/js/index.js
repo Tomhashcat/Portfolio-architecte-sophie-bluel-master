@@ -39,7 +39,10 @@ async function filterWorksByCat(categoryId) {
 
   let galleryContainer = document.querySelector(".gallery");
   galleryContainer.innerHTML = '';
-
+if (token){
+    filtersContainer=document.querySelector('.Filters');
+  filtersContainer.style.display='none';
+}
   if (filteredWorks.length === 0) {
     // Si la galerie est vide, afficher un message
     let noWorksMessage = document.createElement("p");

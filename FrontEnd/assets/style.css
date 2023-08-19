@@ -316,7 +316,7 @@ li:hover {
 
 
 .gallery img {
-	width: 305px;
+	width: auto;
 	height: 407px;
 	cursor: pointer;
 
@@ -646,7 +646,7 @@ justify-content: space-between;
 }
 
 .image-preview {
-	width: 420px;
+	width: auto;
 	height: 169px;
 	position: absolute;
 	margin-bottom: 20%;
