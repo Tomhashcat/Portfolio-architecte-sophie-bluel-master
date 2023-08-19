@@ -304,6 +304,10 @@ li:hover {
 	padding-right: 30px;
 	padding-left: 30px;
 }
+.Filter:hover{
+	background-color: #1D6154;
+	color: white;
+}
 
 .Filter.selected {
 	background-color: #1D6154;
