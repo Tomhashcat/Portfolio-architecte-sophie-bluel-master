@@ -73,7 +73,7 @@ async function ajouterTravailALaBaseDeDonnees() {
     const image = document.querySelector(".input-File-Seconde-Modal").files[0];
 
     if(image){
-        labelPhoto=document.querySelector('.image-')
+        labelPhoto=document.querySelector('.image-preview')
         labelPhoto.style.display='none';
     }
     if (title === "" || categoryId === "" || image === undefined) {
